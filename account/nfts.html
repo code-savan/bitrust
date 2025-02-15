@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/datatables.min.css">
+    <link rel="stylesheet" href="../../assets/css/tiny-slider.css">
+    <link rel="stylesheet" href="../../assets/css/toastr.css" />
+    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+
+</head>
+<style>
+    body {
+        font-family: 'Inter' !important;
+        /* font-size: 13.8px; */
+    }
+
+    button.btn {
+        border-radius: 8px !important;
+    }
+
+    .pos {
+        z-index: 100;
+        position: fixed !important;
+        top: 48px;
+        width: 100% !important;
+    }
+
+    .tns-nav {
+        display: none;
+    }
+
+    .circ {
+        height: 70px;
+        width: 70px;
+        background: rgb(59, 155, 196);
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .img-sc {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body class="" data-mdb-theme="light">
+   <header>
+        <div id="sidenav-1" class="sidenav" role="navigation" data-mdb-close-on-esc="true" data-mdb-position="fixed" data-mdb-hidden="true" data-mdb-mode="side" style="overflow-y: auto;" data-mdb-slim="false" data-mdb-slim-collapsed="true" data-mdb-content="#content" data-mdb-focus-trap="true">
+            <ul class="sidenav-menu mt-5">
+                <li class="sidenav-item text-center border-bottom border-2 my-3">
+                    <div class="cent">
+                        <div class="circ">
+                            <img src="../../assets/images/user/3423512.jpg" class="img-fluid img-sc">
+                        </div>
+                    </div>
+                    <h6 class="fw-bold mt-3 mb-1"> Oseji Marvellous</h6>
+                    <p class="small mb-0">Codesavan</p>
+                    <span class="">Basic Account <i class="material-icons" style="font-size: 0.89em;">star</i>
+                    </span>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./">
+                        <i class="material-icons me-2" style="font-size: 0.99em;">dashboard</i><span> Home</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./market.html">
+                        <i class="fas fa-chart-line me-2"></i><span> Markets</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./trades.html">
+                        <i class="fas fa-chart-bar me-2"></i><span> My trades</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./deposit.html">
+                        <i class="fas fa-sign-in-alt me-2"></i><span> Deposit</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./loan.html">
+                        <i class="fas fa-piggy-bank me-2"></i><span> Take Loan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./nfts.html">
+                        <i class="fas fa-image me-2"></i><span> Buy NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./create-nft.html">
+                        <i class="fas fa-user me-2"></i><span> Create NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./upgrade.html">
+                        <i class="fas fa-cubes me-2"></i><span> Upgrade Plan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./transactions.html">
+                        <i class="fas fa-calendar-alt me-2"></i><span> All Transactions</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./traders.html">
+                        <i class="fas fa-user-tie me-2"></i><span> Copy Traders</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./withdrawal.html">
+                        <i class="fas fa-wallet me-2"></i><span> Withdrawal</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" href="./verification.html">
+                        <i class="fas fa-users me-2"></i><span> Verification</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./profile.html">
+                        <i class="fas fa-cogs me-2"></i><span> User settings</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" href="./logout">
+                        <i class="fas fa-power-off me-2"></i><span> Sign out</span>
+                    </a>
+                </li>
+                <li class="sidenav-item justify-content-center align-items-center d-flex">
+                    <i class="fas fa-sun"></i>
+                    <div class="ms-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                    </div>
+                    <i class="fas fa-moon"></i>
+                </li>
+            </ul>
+            <div class="sidenav-footer mt-5">
+                <p class="text-center">&copy; 2025 Elite Stock Options</p>
+            </div>
+        </div>
+        <!-- Sidenav -->
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar bg-body-tertiary navbar-expand-lg fixed-top">
+            <div class="container-fluid">
+                <a onclick="slimInstance.show()" class="nav-link me-3" data-mdb-content="#slim-content" aria-haspopup="true">
+                    <i class="fas fa-bars" style="cursor: pointer;"></i>
+                    <a href="./" class="navbar-brand">
+                        <img src="../../assets/images/logo-dark.png" id="navbar-brand" class="img-fluid" width="89" />
+                    </a>
+                </a>
+                <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                    <li class="nav-item me-3">
+                                            </li>
+                    <li class="nav-item me-3">
+                        <a onclick="$('#langmodal').modal('show');" style="cursor: pointer;" class="nav-link"> <i class="fas fa-language"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./notifications.html">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-relative top-10 translate-middle badge rounded-pill badge-primary">0<span class="visually-hidden">unread messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuAvatar" data-mdb-toggle="dropdown" role="button" aria-expanded="false" href="#">
+                            <img class="rounded-circle" height="25" src="../../assets/images/user/3423512.jpg" loading="lazy" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item" href="./profile.html">My profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="./logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--Main layout-->
+    <div class="pos">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "proName": "FOREXCOM:SPXUSD",
+                            "title": "S&P 500"
+                        },
+                        {
+                            "proName": "FOREXCOM:NSXUSD",
+                            "title": "US 100"
+                        },
+                        {
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "Bitcoin"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "Ethereum"
+                        },
+                        {
+                            "description": "Binance Smart Chain",
+                            "proName": "BINANCE:BNBUSDT"
+                        },
+                        {
+                            "description": "Luna",
+                            "proName": "BINANCE:LUNAUSDT"
+                        },
+                        {
+                            "description": "Gold",
+                            "proName": "CURRENCYCOM:GOLD"
+                        },
+                        {
+                            "description": "Gasoline",
+                            "proName": "PEPPERSTONE:GASOLINE"
+                        },
+                        {
+                            "description": "Aptos",
+                            "proName": "BINANCE:APTUSDT"
+                        },
+                        {
+                            "description": "Crude oil",
+                            "proName": "CURRENCYCOM:OIL_CRUDE"
+                        },
+                        {
+                            "description": "Solana",
+                            "proName": "BINANCE:SOLUSDT"
+                        },
+                        {
+                            "description": "Polygon Matic",
+                            "proName": "BINANCE:MATICUSDT"
+                        },
+                        {
+                            "description": "Shiba Inu",
+                            "proName": "BINANCE:SHIBUSDT"
+                        },
+                        {
+                            "description": "Cardano",
+                            "proName": "BINANCE:ADAUSDT"
+                        }
+                    ],
+                    "showSymbolLogo": true,
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+    </div><title>Buy NFTs | Elite Stock Options</title>
+<link rel="stylesheet" href="../../assets/css/tiny-slider.css" />
+<style>
+    .tns-nav {
+        display: none;
+    }
+</style>
+<main class="mt-5 pt-5" id="content">
+    <div class="container pt-5">
+        <h4 class="fw-bold">Premium NFTs on Elite Stock Options</h4>
+        <div class="col-md-4 ms-auto mb-3">
+            <form id="searchForm" method="POST" enctype="multipart/form-data">
+                <span class="small text-danger mt-4 mb-0" id="searchError"></span>
+                <div class="form-outline form-outline d-flex" data-mdb-input-init>
+                    <input type="text" placeholder="search gifts" id="searchText" name="searchText" class="form-control" />
+                    <label for="searchText" class="form-label">Search</label>
+                    <button class="btn btn-sm btn-primary" id="btnSearch"><span class="fas fa-search"></span></button>
+                </div>
+            </form>
+        </div>
+        <div class="row" id="visiblenft">
+            <div class="col-lg-12 mt-4 pt-2">
+                <div class="tiny-three-item tiny-timeline">
+                                                <div class="tiny-slide">
+                                <div class="card shadow-3 rounded-3">
+                                    <div class="card-body border border-primary border-1">
+                                        <img src="../../assets/nft/images/bored_apenft.jpeg" loading="lazy" class="card-img-top" alt="Bored Ape" />
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold border-bottom border-1">Bored Ape</h4>
+                                            <div class="d-flex justify-content-between border-bottom my-2">
+                                                <div>
+                                                    <p class="card-text"><span class="fw-bold text-primary">$215,000.00</span><br><span class="small">This is an NFT...</span></p>
+                                                </div>
+                                            </div>
+                                            <center><a href="nft?nftid=NFT244240" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <div class="tiny-slide">
+                                <div class="card shadow-3 rounded-3">
+                                    <div class="card-body border border-primary border-1">
+                                        <img src="../../assets/nft/images/goblinversenft.jpeg" loading="lazy" class="card-img-top" alt="GoblinVerse" />
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold border-bottom border-1">GoblinVerse</h4>
+                                            <div class="d-flex justify-content-between border-bottom my-2">
+                                                <div>
+                                                    <p class="card-text"><span class="fw-bold text-primary">$2,108.07</span><br><span class="small">This is an NFT...</span></p>
+                                                </div>
+                                            </div>
+                                            <center><a href="nft?nftid=NFT556052" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <div class="tiny-slide">
+                                <div class="card shadow-3 rounded-3">
+                                    <div class="card-body border border-primary border-1">
+                                        <img src="../../assets/nft/images/pledge_genesis_oatnft.jpeg" loading="lazy" class="card-img-top" alt="Pledge Genesis Oat" />
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold border-bottom border-1">Pledge Genesis Oat</h4>
+                                            <div class="d-flex justify-content-between border-bottom my-2">
+                                                <div>
+                                                    <p class="card-text"><span class="fw-bold text-primary">$1,192.07</span><br><span class="small">This is an NFT...</span></p>
+                                                </div>
+                                            </div>
+                                            <center><a href="nft?nftid=NFT936744" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <div class="tiny-slide">
+                                <div class="card shadow-3 rounded-3">
+                                    <div class="card-body border border-primary border-1">
+                                        <img src="../../assets/nft/images/phanta_bearnft.jpeg" loading="lazy" class="card-img-top" alt="Phanta Bear" />
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold border-bottom border-1">Phanta Bear</h4>
+                                            <div class="d-flex justify-content-between border-bottom my-2">
+                                                <div>
+                                                    <p class="card-text"><span class="fw-bold text-primary">$673.18</span><br><span class="small">This is an NFT...</span></p>
+                                                </div>
+                                            </div>
+                                            <center><a href="nft?nftid=NFT558191" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <div class="tiny-slide">
+                                <div class="card shadow-3 rounded-3">
+                                    <div class="card-body border border-primary border-1">
+                                        <img src="../../assets/nft/images/phanta_bear_5008nft.jpeg" loading="lazy" class="card-img-top" alt="Phanta Bear 5008" />
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold border-bottom border-1">Phanta Bear 5008</h4>
+                                            <div class="d-flex justify-content-between border-bottom my-2">
+                                                <div>
+                                                    <p class="card-text"><span class="fw-bold text-primary">$674.99</span><br><span class="small">This is an NFT...</span></p>
+                                                </div>
+                                            </div>
+                                            <center><a href="nft?nftid=NFT340616" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        </div>
+            </div>
+        </div>
+        <div class="card border border-1 border-primary mt-3">
+            <div class="card-body p-2">
+                <div class="border-bottom border-2 pb-1 mb-3">
+                    <h5 class="fw-bold text-center">NFT Purchase History</h5>
+                </div>
+                <div class="table-wrapper table-responsive">
+                    <table class="table align-middle hoverable table-striped table-hover" id="depTable">
+                        <thead class="">
+                            <tr class="text-nowrap">
+                                <th scope="col" class="">ID</th>
+                                <th scope="col" class="">Date</th>
+                                <th scope="col" class="">Method</th>
+                                <th scope="col" class="">Type</th>
+                                <th scope="col" class="">Amount</th>
+                                <th scope="col" class="">Status</th>
+                                <th scope="col" class="">Action</th>
+                            </tr>
+                        </thead>
+                                                <tbody>
+                                                            <tr class="text-center">
+                                    <td class='text-center' colspan='7'>No transactions available to show</td>
+                                </tr>
+                                                                    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-fullscreen" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header justify-content-center indigo">
+                    <h3 class="font-weight-bold"><span class="fas fa-search"></span> Search Results <span id="searchCount"></span></h3>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-3 text-start">
+                    <div class="" id="searchResult">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-md btn-primary btn-rounded" onclick="$('#searchModal').modal('hide');">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<a class="floating mdark" id="switcher">
+    <span id="sback" class="fas fa-moon"></span>
+</a>
+<footer class="mt-1 py-2 border-top" style="background: linear-gradient(179deg, #724fe5 6.25%);">
+    <div class="pt-2 container px-3">
+        <div class="text-center">
+            <h6>&copy; 2015 - 2025 Elite Stock Options</h6>
+            <!-- <div class="text-center">
+                <a href="./markets" class="active"><i class="fas fa-chart-bar"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./deposits" class="active"><i class="fas fa-clock"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./" class="active"><i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./upgrade" class="active"><i class="fas fa-calendar-alt"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./account" class="active"><i class="fas fa-user"></i>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="langmodal" tabindex="-1" aria-labelledby="langmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header justify-content-center">
+                <h3 class=""><span class="fas fa-exclamation-circle"></span> information</h3>
+                <button type='button' class='btn-close' data-mdb-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class="modal-body py-4 my-3">
+                <div class="gtranslate_wrapper"></div>
+                <div id="message">
+                    <div class="mt-2">
+                        <button type='button' class='btn btn-md btn-outline-danger' data-mdb-dismiss='modal' aria-label='Close'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal: process-->
+</body>
+<!--<div id="google_translate_element" style="z-index: 1500; position: fixed; bottom:16px; left:15px;"></div>-->
+<!--<script type="text/javascript">-->
+<!--  function googleTranslateElementInit() {-->
+<!--    new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');-->
+<!--  }-->
+<!--</script>-->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="../../assets/js/mdb.min.js"></script>
+<script src="../../assets/js/switchtheme.js"></script>
+<script src="../../assets/js/jquery-redirect.js"></script>
+<script src="../../assets/js/tiny-slider.js"></script>
+<script src="../../assets/js/toastr.js"></script>
+<script>
+    window.gtranslateSettings = {
+        "default_language": "en",
+        "wrapper_selector": ".gtranslate_wrapper"
+    }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/v1.0.1/dropdown.js" defer></script>
+
+<script>
+    //Initialize it with JS to make it instantly visible
+    const slimInstance = new mdb.Sidenav(document.getElementById('sidenav-1'));
+
+    slimInstance.hide();
+
+    const showpass = (pass, span) => {
+        let password = document.getElementById(pass);
+        if (password.type == 'password') {
+            password.type = 'text';
+            $('#' + span).html("<span class= 'fas fa-eye-slash'></span>");
+        } else {
+            password.type = 'password';
+            $('#' + span).html("<span class= 'fas fa-eye'></span>");
+        }
+    }
+
+    $("#switcher").click(function() {
+        const ttt = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+        setTheme(ttt);
+    });
+
+    if (localStorage.getItem("hidebal") == "shown" || !localStorage.getItem("hidebal")) {
+        $('#showBal11').hide();
+        $('#showBal13').hide();
+        $('#showBal131').hide();
+        $('#slashOnes').hide();
+        $('#slashTwos').hide();
+        $('#slashTwose').hide();
+        $('#showBal21').hide();
+        $('#showBal23').hide();
+        $('#showBal25').hide();
+
+        $('#showBal1').show();
+        $('#showBal12').show();
+        $('#slashOne').show();
+        $('#slashTwo').show();
+        $('#slashTwoe').show();
+        $('#showBal2').show();
+        $('#showBal22').show();
+        $('#showBal24').show();
+    } else {
+        if (localStorage.getItem("hidebal") == "hidden") {
+            $('#showBal11').show();
+            $('#showBal13').show();
+            $('#showBal131').show();
+            $('#slashOne').show();
+            $('#slashTwo').show();
+            $('#slashTwoe').show();
+            $('#showBal21').show();
+            $('#showBal23').show();
+            $('#showBal25').show();
+
+            $('#showBal1').hide();
+            $('#showBal12').hide();
+            $('#showBal121').hide();
+            $('#slashOnes').hide();
+            $('#slashTwos').hide();
+            $('#slashTwose').hide();
+            $('#showBal2').hide();
+            $('#showBal22').hide();
+            $('#showBal24').hide();
+        }
+    }
+
+    function hideBal() {
+        localStorage.setItem("hidebal", "hidden");
+        $('#showBal11').show();
+        $('#showBal13').show();
+        $('#showBal131').show();
+        $('#slashOne').show();
+        $('#slashTwo').show();
+        $('#slashTwoe').show();
+        $('#showBal21').show();
+        $('#showBal23').show();
+        $('#showBal25').show();
+
+        $('#showBal1').hide();
+        $('#showBal12').hide();
+        $('#showBal121').hide();
+        $('#slashOnes').hide();
+        $('#slashTwos').hide();
+        $('#slashTwose').hide();
+        $('#showBal2').hide();
+        $('#showBal22').hide();
+        $('#showBal24').hide();
+    }
+
+    function showBal() {
+        localStorage.setItem("hidebal", "shown");
+        $('#showBal11').hide();
+        $('#showBal13').hide();
+        $('#showBal131').hide();
+        $('#slashOne').hide();
+        $('#slashTwo').hide();
+        $('#slashTwoe').hide();
+        $('#showBal21').hide();
+        $('#showBal23').hide();
+        $('#showBal25').hide();
+
+        $('#showBal1').show();
+        $('#showBal12').show();
+        $('#showBal121').show();
+        $('#slashOnes').show();
+        $('#slashTwos').show();
+        $('#slashTwose').show();
+        $('#showBal2').show();
+        $('#showBal22').show();
+        $('#showBal24').show();
+    }
+
+    $('#switchBtn').click(() => {
+        let request = "changeType";
+        let accts = 'demo';
+        $.ajax({
+            url: '../../ops/users',
+            type: 'POST',
+            data: {
+                request,
+                'account': accts
+            },
+            success: function(data) {
+                let response = $.parseJSON(data);
+                if (response.status == "success") {
+                    toastr.info(response.message);
+                    setTimeout('window.location.href = "./demo";', 2000);
+                } else {
+                    toastr.info(response.message);
+                }
+            },
+            cache: false,
+            error: function() {
+                toastr.info("An error has occured!!");
+            }
+        });
+    });
+
+    function redir(link, params) {
+        $.redirect(link, params);
+    }
+
+    $(document).ready(function() {
+        if (window.innerWidth <= 700) {
+            slimInstance.hide();
+            $("#sidenav-1").attr("data-mdb-mode", "over");
+        } else if (window.innerWidth > 700) {
+            slimInstance.show();
+            $("#sidenav-1").attr("data-mdb-mode", "side");
+            $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
+        }
+
+    });
+
+    window.addEventListener('resize', () => {
+        // Toggle on mobile
+        if (window.innerWidth <= 700) {
+            slimInstance.hide();
+            $("#sidenav-1").attr("data-mdb-mode", "over");
+        } else if (window.innerWidth > 700) {
+            slimInstance.show();
+            $("#sidenav-1").attr("data-mdb-mode", "side");
+            $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
+        }
+    });
+</script>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = 'd258f195df6b89c5a8613da0ea66c14d5227b899';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+<noscript> Powered by <a href=“https://elitestockoptions.com” target=“_blank”>Elite Stock Options</a></noscript>
+<!-- End Smartsupp Live Chat script -->
+
+</html><script src="../../assets/js/tiny-slider.js"></script>
+<script>
+    if (document.getElementsByClassName('tiny-three-item').length > 0) {
+        var slider = tns({
+            container: '.tiny-three-item',
+            controls: false,
+            mouseDrag: true,
+            loop: true,
+            rewind: true,
+            autoplay: true,
+            autoplayButtonOutput: false,
+            autoplayTimeout: 2000,
+            navPosition: "top",
+            speed: 400,
+            gutter: 12,
+            responsive: {
+                992: {
+                    items: 3
+                },
+
+                767: {
+                    items: 2
+                },
+
+                320: {
+                    items: 1
+                },
+            },
+        });
+    };
+
+    $(document).ready(() => {
+        $('#searchModal').modal('hide');
+    });
+
+    $("form#searchForm").submit(function(e) {
+        let searchRes = [];
+        e.preventDefault();
+        var formData = new FormData(this);
+        formData.append('request', 'searchNft');
+        if ($('#searchText').val() == null || $('#searchText').val() == "") {
+            $('#searchError').html('Please enter a text in the search box').show();
+            setTimeout(function() {
+                $('#searchError').html("").hide();
+            }, 5000);
+        } else if ($('#searchText').val().length < 3) {
+            $('#searchError').html('Search text length is less than 4 characters').show();
+            setTimeout(function() {
+                $('#searchError').html("").hide();
+            }, 5000);
+        } else {
+            $.ajax({
+                url: '../../ops/users',
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    $('#btnSearch').html("<span class='fas fa-spinner fa-spin'></span>");
+                    setTimeout(() => {
+                        $('#btnSearch').html("<span class='fas fa-search'></span>");
+                    }, 5000);
+                },
+                success: function(data) {
+                    var result = $.parseJSON(data);
+                    if (result.status == "success") {
+                        $('#searchModal').modal('show');
+                        $("#searchResult").html(result.message).show();
+                        searchRes = result.result;
+                        $('#searchCount').html(`(${searchRes.length})`);
+                        let div = "";
+                        let symbol = "$";
+                        for (var i = 0; i < searchRes.length; i++) {
+                            div += `<div class="col-md-4 mb-3">
+	                		<div class="card bg-primary bg-gradient shadow-3">
+	                			<div class="card-body">
+    	                			<div class="card shadow-3 rounded-3">
+        								<div class="card-body border border-primary border-1">
+        								    <img src="../../assets/nft/images/${searchRes[i]['nftimage']}" loading="lazy" class="card-img-top" alt="${searchRes[i]['nftname']}"/>
+            								<div class="card-body">
+            									<h4 class="card-title fw-bold border-bottom border-1">${searchRes[i]['nftname']}</h4>
+            									<div class="d-flex justify-content-between border-bottom my-2">
+            										<div><p class="card-text"><span class="fw-bold text-primary">$${searchRes[i]['nftprice']}</span><br><span class="small">${searchRes[i]['nftdesc']}...</span></p></div>
+            									</div>
+            									<center><a href="nft?nftid=${searchRes[i]['nftid']}" class="btn btn-outline-primary btn-rounded">View/Buy</a></center>
+            								</div>
+        								</div>
+        							</div>
+                                </div>
+							</div>
+	                	</div>`;
+                        }
+                        let div1 = document.createElement('div');
+                        div1.className = 'row';
+                        div1.innerHTML = div;
+                        // console.log
+                        $('#searchResult').html(div1);
+                    } else {
+                        $('#searchError').html(result.message).show();
+                        setTimeout(function() {
+                            $('#searchError').html("").hide();
+                        }, 5000);
+                    }
+                },
+                cache: false,
+                error: function() {
+                    $('#searchError').html("An error occured").show();
+                    setTimeout(function() {
+                        $('#searchError').html("").hide();
+                    }, 5000);
+                },
+                contentType: false,
+                processData: false
+            });
+        }
+    });
+</script>
