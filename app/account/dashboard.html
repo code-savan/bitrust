@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../assets/images/logo-dark.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/datatables.min.css">
+    <link rel="stylesheet" href="../../assets/css/tiny-slider.css">
+    <link rel="stylesheet" href="../../assets/css/toastr.css" />
+    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+    <title>Dashboard | BitTrust</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5ZWRseWdtcWh1cHNsZmVmanF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2Mjc4MjIsImV4cCI6MjA1NTIwMzgyMn0.S4272Z5J5dEf8_UUbunLhSt03LqKww5RqSV8LzDTISQ";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+
+</head>
+<style>
+    body {
+        font-family: 'Inter' !important;
+        /* font-size: 13.8px; */
+    }
+
+    button.btn {
+        border-radius: 8px !important;
+    }
+
+    .pos {
+        z-index: 100;
+        position: fixed !important;
+        top: 48px;
+        width: 100% !important;
+    }
+
+    .tns-nav {
+        display: none;
+    }
+
+    .circ {
+        height: 70px;
+        width: 70px;
+        background: rgb(59, 155, 196);
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .img-sc {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body class="" data-mdb-theme="light">
+    <header>
+        <div id="sidenav-1" class="sidenav" role="navigation" data-mdb-close-on-esc="true" data-mdb-position="fixed" data-mdb-hidden="true" data-mdb-mode="side" style="overflow-y: auto;" data-mdb-slim="false" data-mdb-slim-collapsed="true" data-mdb-content="#content" data-mdb-focus-trap="true">
+            <ul class="sidenav-menu mt-5">
+                <li class="sidenav-item text-center border-bottom border-2 my-3">
+                    <div class="cent">
+                        <div class="circ">
+                            <img src="../../assets/images/user/3423512.jpg" class="img-fluid img-sc">
+                        </div>
+                    </div>
+                    <h6 class="fw-bold mt-3 mb-1"><span id="userName"></span></h6>
+                    <p class="small mb-0"><span id="userUsername"></span></p>
+                    <span class=""> <span id="userLevel"></span> Account <i class="material-icons" style="font-size: 0.89em;">star</i>
+                    </span>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./dashboard.html">
+                        <i class="material-icons me-2" style="font-size: 0.99em;">dashboard</i><span> Home</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./market.html">
+                        <i class="fas fa-chart-line me-2"></i><span> Markets</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./trades.html">
+                        <i class="fas fa-chart-bar me-2"></i><span> My trades</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./deposit.html">
+                        <i class="fas fa-sign-in-alt me-2"></i><span> Deposit</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./loan.html">
+                        <i class="fas fa-piggy-bank me-2"></i><span> Take Loan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./nfts.html">
+                        <i class="fas fa-image me-2"></i><span> Buy NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./create-nft.html">
+                        <i class="fas fa-user me-2"></i><span> Create NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./upgrade.html">
+                        <i class="fas fa-cubes me-2"></i><span> Upgrade Plan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./transactions.html">
+                        <i class="fas fa-calendar-alt me-2"></i><span> All Transactions</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./traders.html">
+                        <i class="fas fa-user-tie me-2"></i><span> Copy Traders</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./withdrawal.html">
+                        <i class="fas fa-wallet me-2"></i><span> Withdrawal</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" href="./verification.html">
+                        <i class="fas fa-users me-2"></i><span> Verification</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./profile.html">
+                        <i class="fas fa-cogs me-2"></i><span> User settings</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" onclick="signOut()">
+                        <i class="fas fa-power-off me-2"></i><span> Sign out</span>
+                    </a>
+                </li>
+                <li class="sidenav-item justify-content-center align-items-center d-flex">
+                    <i class="fas fa-sun"></i>
+                    <div class="ms-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                    </div>
+                    <i class="fas fa-moon"></i>
+                </li>
+            </ul>
+            <div class="sidenav-footer mt-5">
+                <p class="text-center">&copy; 2025 BitTrust</p>
+            </div>
+        </div>
+        <!-- Sidenav -->
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar bg-body-tertiary navbar-expand-lg fixed-top">
+            <div class="container-fluid">
+                <a onclick="slimInstance.show()" class="nav-link me-3" data-mdb-content="#slim-content" aria-haspopup="true">
+                    <i class="fas fa-bars" style="cursor: pointer;"></i>
+                    <a href="./" class="navbar-brand">
+                        <img src="../../assets/images/logo-dark.png" id="navbar-brand" class="img-fluid" width="89" />
+                    </a>
+                </a>
+                <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                    <li class="nav-item me-3">
+                                            </li>
+                    <li class="nav-item me-3">
+                        <a onclick="$('#langmodal').modal('show');" style="cursor: pointer;" class="nav-link"> <i class="fas fa-language"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./notifications.html">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-relative top-10 translate-middle badge rounded-pill badge-primary">0<span class="visually-hidden">unread messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuAvatar" data-mdb-toggle="dropdown" role="button" aria-expanded="false" href="#">
+                            <img class="rounded-circle" height="25" src="../../assets/images/user/3423512.jpg" loading="lazy" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item" href="./profile.html">My profile</a>
+                            </li>
+                            <li>
+                                <p class="dropdown-item" onclick="signOut()">Logout</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--Main layout-->
+    <div class="pos">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [
+                        {
+                            "proName": "FOREXCOM:SPXUSD",
+                            "title": "S&P 500"
+                        },
+                        {
+                            "proName": "FOREXCOM:NSXUSD",
+                            "title": "US 100"
+                        },
+                        {
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "Bitcoin"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "Ethereum"
+                        },
+                        {
+                            "description": "Binance Smart Chain",
+                            "proName": "BINANCE:BNBUSDT"
+                        },
+                        {
+                            "description": "Luna",
+                            "proName": "BINANCE:LUNAUSDT"
+                        },
+                        {
+                            "description": "Gold",
+                            "proName": "CURRENCYCOM:GOLD"
+                        },
+                        {
+                            "description": "Gasoline",
+                            "proName": "PEPPERSTONE:GASOLINE"
+                        },
+                        {
+                            "description": "Aptos",
+                            "proName": "BINANCE:APTUSDT"
+                        },
+                        {
+                            "description": "Crude oil",
+                            "proName": "CURRENCYCOM:OIL_CRUDE"
+                        },
+                        {
+                            "description": "Solana",
+                            "proName": "BINANCE:SOLUSDT"
+                        },
+                        {
+                            "description": "Polygon Matic",
+                            "proName": "BINANCE:MATICUSDT"
+                        },
+                        {
+                            "description": "Shiba Inu",
+                            "proName": "BINANCE:SHIBUSDT"
+                        },
+                        {
+                            "description": "Cardano",
+                            "proName": "BINANCE:ADAUSDT"
+                        }
+                    ],
+                    "showSymbolLogo": true,
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en";
+                }
+            </script>
+        </div>
+    </div><title>Dashboard | BitTrust</title>
+<style>
+    /* div [data-index] {
+        width: auto !important;
+    } */
+</style>
+<main class="mt-5 pt-5 pb-3" id="content">
+    <div class="container pt-5">
+        <h4 class="mb-3">Welcome <span class="fw-bold" id="welcomeUsername"></span>
+        </h4>
+
+        <div class="card shadow-4-strong border border-1 border-primary my-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="mb-2"><span class="small">Complete account verification</span></h5>
+                        <a href="./verification" class="btn btn-outline-primary btn-sm mt-2">Proceed</a>
+                    </div>
+                    <div class="mt-3">
+                        <img src="../../assets/images/userverify.png" class="img-fluid" style="max-width: 70px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tiny-two-item">
+            <div class="tiny-slide">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="flex-fill">
+                                <span class="small text-muted">Trading Balance</span>
+                                <h3>
+                                    <span id="showBal1"></span>
+                                    <span id="showBal11">******</span>
+                                </h3>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)">
+                                    <i class="fas fa-eye-slash" onclick="showBal('showBal1', 'showBal11');"></i>
+                                    <i class="fas fa-eye" onclick="hideBal('showBal1', 'showBal11');"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><span class="small">Current day loss</span></div>
+                            <div>
+                                <span class="text-danger small">
+                                    <span id="showBal22"></span>
+                                    <span id="showBal23">*****</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><span class="small">All day gain</span></div>
+                            <div>
+                                <span class="text-success small">
+                                    <span id="showBal24"></span>
+                                    <span id="showBal25">*****</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tiny-slide">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="flex-fill">
+                                <span class="small text-muted">Profit</span>
+                                <h3>
+                                    <span id="showBal12"></span>
+                                    <span id="showBal13">******</span>
+                                </h3>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)">
+                                    <i class="fas fa-eye-slash" onclick="showBal('showBal12', 'showBal13');"></i>
+                                    <i class="fas fa-eye" onclick="hideBal('showBal12', 'showBal13');"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><span class="small">Current day profit</span></div>
+                            <div>
+                                <span class="text-success small">
+                                    <span id="showBal2"></span>
+                                    <span id="showBal21">*****</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tiny-slide">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="flex-fill">
+                                <span class="small text-muted">Bonus</span>
+                                <h3>
+                                    <span id="showBal121"></span>
+                                    <span id="showBal131">******</span>
+                                </h3>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)">
+                                    <i class="fas fa-eye-slash" onclick="showBal('showBal121', 'showBal131');"></i>
+                                    <i class="fas fa-eye" onclick="hideBal('showBal121', 'showBal131');"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-3">
+            <div class="shadow-4-strong card border border-2 border-primary">
+                <div class="card-body px-2">
+                    <div class="d-flex justify-content-between align-items-center mb-3 border-primary border-bottom border-1">
+                        <div class="flex-fill">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./chart.html">
+                                    <p class="small"><i class="fas text-primary fa-chart-pie"></i><br><span class="" style="font-size: 11px;">Place Trade</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./claimbonus.html">
+                                    <p class="small"><i class="fas text-primary fa-piggy-bank"></i><br><span class="" style="font-size: 11px;">Claim Bonus</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./market.html">
+                                    <p class="small"><i class="fas text-primary fa-image"></i><br><span class="" style="font-size: 11px;">Market</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./commodities.html">
+                                    <p class="small"><i class="fas text-primary fa-landmark"></i><br><span class="" style="font-size: 11px;">Commodities</span></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="flex-fill text-center">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./deposit.html">
+                                    <p class="small"><i class="fas text-primary fa-donate"></i><br><span class="" style="font-size: 11px;">Deposit</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill text-center">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./withdrawal.html">
+                                    <p class="small"><i class="fas text-primary fa-wallet"></i><br><span class="" style="font-size: 11px;">Withdraw</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill text-center">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./upgrade.html">
+                                    <p class="small"><i class="fas text-primary fa-cubes"></i><br><span class="" style="font-size: 11px;">Upgrade plan</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-fill text-center">
+                            <div class="rounded-circle">
+                                <a class="text-center" href="./traders.html">
+                                    <p class="small"><i class="fas text-primary fa-chart-line"></i><br><span class="" style="font-size: 11px;">Copy Trader</span></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border border-primary border-1 mb-3">
+            <div class="card-header">
+                <h4>Top crypto assets</h4>
+            </div>
+            <div class="card-body">
+                <div id="cryptoAssets"></div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div class="card border border-1 border-primary">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-3">Recent activity</h5>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <th class="text-nowrap">SN</th>
+                                    <th class="text-nowrap">Transaction type</th>
+                                    <th class="text-nowrap">Date</th>
+                                    <th class="text-nowrap">Amount</th>
+                                    <th class="text-nowrap">Status</th>
+                                    <th class="text-nowrap">Action</th>
+                                </thead>
+                                <tbody>
+                                    <tr class='text-center'><td colspan='6'>No transations available</td></tr>                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md- mb-3">
+                <div class="card border border-1 border-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="">
+                                <h5 class="fw-bold">Recent trades</h5>
+                            </div>
+                            <div class="">
+                                <a class="link" href="./trades">View all</a>
+                            </div>
+                        </div>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <th class="text-nowrap">SN</th>
+                                    <th class="text-nowrap">Asset</th>
+                                    <th class="text-nowrap">Trade type</th>
+                                    <th class="text-nowrap">Date</th>
+                                    <th class="text-nowrap">Amount</th>
+                                    <th class="text-nowrap">Status</th>
+                                    <th class="text-nowrap">Action</th>
+                                </thead>
+                                <tbody>
+                                    <tr class='text-center'><td colspan='7'>No trades available to show</td></tr>                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="card border border-1 border-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="">
+                                <h5 class="fw-bold mb-3">Recent withdrawals</h5>
+                            </div>
+                            <div class="">
+                                <a class="link" href="./withdrawal">View all</a>
+                            </div>
+                        </div>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <th class="text-nowrap">SN</th>
+                                    <th class="text-nowrap">Date</th>
+                                    <th class="text-nowrap">Amount</th>
+                                    <th class="text-nowrap">Status</th>
+                                    <th class="text-nowrap">Action</th>
+                                </thead>
+                                <tbody>
+                                    <tr class='text-center'><td colspan='5'>No withrawals available to show</td></tr>                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<a class="floating mdark" id="switcher">
+    <span id="sback" class="fas fa-moon"></span>
+</a>
+<footer class="mt-1 py-2 border-top" style="background: linear-gradient(179deg, #724fe5 6.25%);">
+    <div class="pt-2 container px-3">
+        <div class="text-center">
+            <h6>&copy; 2015 - 2025 BitTrust</h6>
+            <!-- <div class="text-center">
+                <a href="./markets" class="active"><i class="fas fa-chart-bar"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./deposits" class="active"><i class="fas fa-clock"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./" class="active"><i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./upgrade" class="active"><i class="fas fa-calendar-alt"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./account" class="active"><i class="fas fa-user"></i>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="langmodal" tabindex="-1" aria-labelledby="langmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header justify-content-center">
+                <h3 class=""><span class="fas fa-exclamation-circle"></span> information</h3>
+                <button type='button' class='btn-close' data-mdb-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class="modal-body py-4 my-3">
+                <div class="gtranslate_wrapper"></div>
+                <div id="message">
+                    <div class="mt-2">
+                        <button type='button' class='btn btn-md btn-outline-danger' data-mdb-dismiss='modal' aria-label='Close'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal: process-->
+</body>
+<!--<div id="google_translate_element" style="z-index: 1500; position: fixed; bottom:16px; left:15px;"></div>-->
+<!--<script type="text/javascript">-->
+<!--  function googleTranslateElementInit() {-->
+<!--    new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');-->
+<!--  }-->
+<!--</script>-->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="../../assets/js/mdb.min.js"></script>
+<script src="../../assets/js/switchtheme.js"></script>
+<script src="../../assets/js/jquery-redirect.js"></script>
+<script src="../../assets/js/tiny-slider.js"></script>
+<script src="../../assets/js/toastr.js"></script>
+<script>
+    window.gtranslateSettings = {
+        "default_language": "en",
+        "wrapper_selector": ".gtranslate_wrapper"
+    }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/v1.0.1/dropdown.js" defer></script>
+
+<script>
+    //Initialize it with JS to make it instantly visible
+    const slimInstance = new mdb.Sidenav(document.getElementById('sidenav-1'));
+
+    slimInstance.hide();
+
+    const showpass = (pass, span) => {
+        let password = document.getElementById(pass);
+        if (password.type == 'password') {
+            password.type = 'text';
+            $('#' + span).html("<span class= 'fas fa-eye-slash'></span>");
+        } else {
+            password.type = 'password';
+            $('#' + span).html("<span class= 'fas fa-eye'></span>");
+        }
+    }
+
+    $("#switcher").click(function() {
+        const ttt = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+        setTheme(ttt);
+    });
+
+    if (localStorage.getItem("hidebal") == "shown" || !localStorage.getItem("hidebal")) {
+        $('#showBal11').hide();
+        $('#showBal13').hide();
+        $('#showBal131').hide();
+        $('#slashOnes').hide();
+        $('#slashTwos').hide();
+        $('#slashTwose').hide();
+        $('#showBal21').hide();
+        $('#showBal23').hide();
+        $('#showBal25').hide();
+
+        $('#showBal1').show();
+        $('#showBal12').show();
+        $('#slashOne').show();
+        $('#slashTwo').show();
+        $('#slashTwoe').show();
+        $('#showBal2').show();
+        $('#showBal22').show();
+        $('#showBal24').show();
+    } else {
+        if (localStorage.getItem("hidebal") == "hidden") {
+            $('#showBal11').show();
+            $('#showBal13').show();
+            $('#showBal131').show();
+            $('#slashOne').show();
+            $('#slashTwo').show();
+            $('#slashTwoe').show();
+            $('#showBal21').show();
+            $('#showBal23').show();
+            $('#showBal25').show();
+
+            $('#showBal1').hide();
+            $('#showBal12').hide();
+            $('#showBal121').hide();
+            $('#slashOnes').hide();
+            $('#slashTwos').hide();
+            $('#slashTwose').hide();
+            $('#showBal2').hide();
+            $('#showBal22').hide();
+            $('#showBal24').hide();
+        }
+    }
+
+    function hideBal() {
+        localStorage.setItem("hidebal", "hidden");
+        $('#showBal11').show();
+        $('#showBal13').show();
+        $('#showBal131').show();
+        $('#slashOne').show();
+        $('#slashTwo').show();
+        $('#slashTwoe').show();
+        $('#showBal21').show();
+        $('#showBal23').show();
+        $('#showBal25').show();
+
+        $('#showBal1').hide();
+        $('#showBal12').hide();
+        $('#showBal121').hide();
+        $('#slashOnes').hide();
+        $('#slashTwos').hide();
+        $('#slashTwose').hide();
+        $('#showBal2').hide();
+        $('#showBal22').hide();
+        $('#showBal24').hide();
+    }
+
+    function showBal() {
+        localStorage.setItem("hidebal", "shown");
+        $('#showBal11').hide();
+        $('#showBal13').hide();
+        $('#showBal131').hide();
+        $('#slashOne').hide();
+        $('#slashTwo').hide();
+        $('#slashTwoe').hide();
+        $('#showBal21').hide();
+        $('#showBal23').hide();
+        $('#showBal25').hide();
+
+        $('#showBal1').show();
+        $('#showBal12').show();
+        $('#showBal121').show();
+        $('#slashOnes').show();
+        $('#slashTwos').show();
+        $('#slashTwose').show();
+        $('#showBal2').show();
+        $('#showBal22').show();
+        $('#showBal24').show();
+    }
+
+    $('#switchBtn').click(() => {
+        let request = "changeType";
+        let accts = 'demo';
+        $.ajax({
+            url: '../../ops/users',
+            type: 'POST',
+            data: {
+                request,
+                'account': accts
+            },
+            success: function(data) {
+                let response = $.parseJSON(data);
+                if (response.status == "success") {
+                    toastr.info(response.message);
+                    setTimeout('window.location.href = "./demo";', 2000);
+                } else {
+                    toastr.info(response.message);
+                }
+            },
+            cache: false,
+            error: function() {
+                toastr.info("An error has occured!!");
+            }
+        });
+    });
+
+    function redir(link, params) {
+        $.redirect(link, params);
+    }
+
+    $(document).ready(function() {
+        if (window.innerWidth <= 700) {
+            slimInstance.hide();
+            $("#sidenav-1").attr("data-mdb-mode", "over");
+        } else if (window.innerWidth > 700) {
+            slimInstance.show();
+            $("#sidenav-1").attr("data-mdb-mode", "side");
+            $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
+        }
+
+    });
+
+    window.addEventListener('resize', () => {
+        // Toggle on mobile
+        if (window.innerWidth <= 700) {
+            slimInstance.hide();
+            $("#sidenav-1").attr("data-mdb-mode", "over");
+        } else if (window.innerWidth > 700) {
+            slimInstance.show();
+            $("#sidenav-1").attr("data-mdb-mode", "side");
+            $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
+        }
+    });
+</script>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = 'd258f195df6b89c5a8613da0ea66c14d5227b899';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+<noscript> Powered by <a href=“https://elitestockoptions.com” target=“_blank”>BitTrust</a></noscript>
+<!-- End Smartsupp Live Chat script -->
+
+</html>
+<script>
+    // let hiden =
+
+    $(document).ready(function() {
+        getAssets();
+    });
+
+
+    if (document.getElementsByClassName('tiny-two-item').length > 0) {
+        var slider = tns({
+            container: '.tiny-two-item',
+            controls: false,
+            mouseDrag: true,
+            loop: true,
+            rewind: true,
+            autoplay: true,
+            autoplayButtonOutput: false,
+            autoplayTimeout: 3000,
+            navPosition: "bottom",
+            speed: 400,
+            gutter: 12,
+            responsive: {
+                992: {
+                    items: 1
+                },
+                767: {
+                    items: 1
+                },
+                320: {
+                    items: 1
+                },
+            },
+        });
+    };
+
+    function getAssets() {
+        let divData = [];
+        $.ajax({
+            url: 'https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,binance-coin,xrp,dogecoin,solana,stellar,litecoin',
+            method: 'GET',
+            async: true,
+            success: function(json) {
+                if (json.data.length > 0) {
+                    let index;
+                    for (var i = 0; i < json.data.length; i++) {
+                        if (json.data[i].changePercent24Hr > 0) {
+                            badge = "bg-success";
+                        } else if (json.data[i].changePercent24Hr < 0) {
+                            badge = "bg-danger";
+                        } else {
+                            badge = "bg-primary";
+                        }
+                        let div = `<div class="row pt-3 border-bottom border-1" style="cursor: pointer" onclick="$.redirect('chart.html', {market: 'crypto', symbol: '${json.data[i].symbol}USD'})">
+
+                          <div class="col-md-2" dataIndex="${i}" style="width: 15.66667% !important;">
+                          <img class="img-fluid" width="40" loading="lazy" height="40" src="https://assets.coincap.io/assets/icons/${json.data[i].symbol.toLowerCase()}@2x.png" src="${json.data[i].symbol}" />
+                          </div>
+
+                          <div class="col-md-4" dataIndex="${i}" style="width: 32.33333% !important;">
+                          <p class="text-start small mb-0" style="font-size: 0.695em;">${json.data[i].symbol}</p>
+                          <p class="text-start small" style="font-size: 0.695em;">${json.data[i].name}</p>
+                          </div>
+
+                          <div class="col-md-3" dataIndex="${i}" style="width: 30% !important;">
+                          <p class="text-start small" style="font-size: 0.695em;">$${parseFloat(json.data[i].priceUsd).toFixed(2)}</p>
+                          </div>
+
+                          <div class="col-md-3" dataIndex="${i}" style="width: 22% !important;">
+                          <p class="text-start badge ${badge} small" style="font-size: 0.695em;">${parseFloat(
+                            json.data[i].changePercent24Hr
+                          ).toFixed(2)}%</p>
+                          </div>`;
+                        divData.push(div);
+                    }
+                    $("#cryptoAssets").append(divData);
+                }
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+    }
+
+    function removefav(symbol) {
+        $.ajax({
+            url: '../../ops/users',
+            method: 'POST',
+            data: {
+                request: "removefav",
+                symbol: symbol
+            },
+            success: function(data) {
+                var response = $.parseJSON(data);
+                if (response.status == 'success') {
+                    toastr.info(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function(err) {
+                toastr.error(err.statusText);
+            }
+        });
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Get the current session
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+
+            if (sessionError) {
+                throw sessionError;
+            }
+
+            if (!session) {
+                // User is not logged in, redirect to signin page
+                window.location.href = "../../signin.html";
+                return;
+            }
+
+            // Fetch user profile information
+            const { data: profile, error: profileError } = await supabaseClient
+                .from('profiles')
+                .select('name, username, level, total_balance, available_balance, profit_balance, bonus_balance, pending_withdrawal')
+                .eq('id', session.user.id)
+                .single();
+
+            if (profileError) {
+                throw profileError;
+            }
+
+            console.log('Fetching profile...');
+            console.log('Profile Data:', profile);
+
+            // Populate sidebar with user information
+            document.getElementById('userName').textContent = profile.name;
+            document.getElementById('userUsername').textContent = profile.username;
+            document.getElementById('userLevel').textContent = profile.level;
+
+            // Populate main content with user information
+            document.getElementById('welcomeUsername').textContent = profile.username;
+
+            // Populate Trading Balances
+            document.getElementById('showBal1').textContent = `$${profile.available_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal22').textContent = `-$${Math.abs(profile.available_balance.toFixed(2))}` || '0.00';
+            document.getElementById('showBal24').textContent = `+$${profile.available_balance.toFixed(2)}` || '0.00';
+
+            // Populate Profit Balances
+            document.getElementById('showBal12').textContent = `$${profile.profit_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal2').textContent = `+$${profile.profit_balance.toFixed(2)}` || '0.00';
+
+            // Populate Bonus Balances
+            document.getElementById('showBal121').textContent = `$${profile.bonus_balance.toFixed(2)}` || '0.00';
+
+            // Populate Pending Withdrawal
+            document.getElementById('pendingWithdrawal').textContent = `$${profile.pending_withdrawal.toFixed(2)}` || '0.00';
+
+        } catch (err) {
+            console.error('Error:', err.message);
+            // Optionally, display an error message to the user
+            // alert(`Error: ${err.message}`);
+        }
+
+        async function signOut() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'signin.html';
+        }
+    });
+</script>
+
+<script>
+    function showBal(balanceId, maskId) {
+        document.getElementById(balanceId).style.display = 'block';
+        document.getElementById(maskId).style.display = 'none';
+    }
+
+    function hideBal(balanceId, maskId) {
+        document.getElementById(balanceId).style.display = 'none';
+        document.getElementById(maskId).style.display = 'block';
+    }
+</script>

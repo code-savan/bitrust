@@ -24,16 +24,24 @@
     <meta property="og:type" content="webBitTrust">
     <meta property="og:image" content="assets/images/favicon.png">
 
-    <link rel="shortcut icon" href="https://elitestockoptions.com/assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/aos.css">
-    <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/toastr.css">
+    <link rel="stylesheet" href="../../assets/css/toastr.css">
     <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/all.min.css">
 
     <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/swiper-bundle.min.css">
     <!-- main css for template -->
     <link rel="stylesheet" href="https://elitestockoptions.com/assets/css/style.css">
+
+    <!-- Initialize Supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
 </head>
 <style>
     .pos{
@@ -58,44 +66,44 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="https://elitestockoptions.com/">
                             <img class="dark" width="160" src="https://elitestockoptions.com/assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="menu-area">
                         <ul class="menu menu--style1">
                             <li class="">
-                                <a href="index.html">Home </a>
+                                <a href="https://elitestockoptions.com/">Home </a>
                             </li>
                             <li class="">
-                                <a href="about.html">About </a>
+                                <a href="https://elitestockoptions.com/about">About </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">Services</a>
                                 <ul class="submenu">
-                                    <li><a href="buy-crypto.html">Buy Crypto</a></li>
-                                    <li><a href="copy-trading.html">Copy Trading</a></li>
+                                    <li><a href="https://elitestockoptions.com/buy-crypto">Buy Crypto</a></li>
+                                    <li><a href="https://elitestockoptions.com/copy-trading">Copy Trading</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">Trading Tools</a>
                                 <ul class="submenu">
-                                    <li><a href="markets%3Fmarket=forex.html">Forex Charts</a></li>
-                                    <li><a href="markets%3Fmarket=index.html">Index Charts</a></li>
-                                    <li><a href="markets%3Fmarket=crypto.html">Crypto Market</a></li>
+                                    <li><a href="https://elitestockoptions.com/markets?market=forex">Forex Charts</a></li>
+                                    <li><a href="https://elitestockoptions.com/markets?market=index">Index Charts</a></li>
+                                    <li><a href="https://elitestockoptions.com/markets?market=crypto">Crypto Market</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="licenses.html">Licenses</a>
+                                <a href="https://elitestockoptions.com/licenses">Licenses</a>
                             </li>
                             <li>
-                                <a href="contact.html">Contact Us</a>
+                                <a href="https://elitestockoptions.com/contact">Contact Us</a>
                             </li>
                             <li>
-                                <a href="signin.html">Sign in</a>
+                                <a href="logout.html">Sign in</a>
                             </li>
                             <li>
-                                <a href="signup.html">Sign up</a>
+                                <a href="https://elitestockoptions.com/signup">Sign up</a>
                             </li>
                         </ul>
                     </div>
@@ -116,8 +124,7 @@
             <div class="cryptohopper-web-widget" data-id="2" data-realtime="on"></div>
         </div>
     </header>
-    <!-- ===============>> Header section end here <<================= --><title>Forgot Password - BitTrust</title>
-
+    <!-- ===============>> Header section end here <<================= --><title>Sign in - BitTrust</title>
 <section class="account padding-top padding-bottom sec-bg-color2">
 	<div class="container">
 		<div class="account__wrapper" data-aos="fade-up" data-aos-duration="800">
@@ -131,34 +138,57 @@
 					<div class="col-lg-6">
 						<div class="account__content account__content--style2">
 							<div class="account__header">
-								<h2>Reset password</h2>
-								<p class="mb-0">Hey there! Forgot your password? No worries! Just click on "Reset password" and follow the steps.</p>
+								<h2>Log in</h2>
+								<p class="mb-0">Enter your details below to sign in</p>
 							</div>
-							<form method="POST" enctype="multipart/form-data" id="recover" class="account__form needs-validation" novalidate>
+							<form id="loginForm" method="POST" class="account__form needs-validation" novalidate>
 								<div class="row g-4">
 									<div class="col-12">
 										<div>
-											<label for="email" class="form-label">Email</label>
-											<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+											<label for="username" class="form-label">Username/Email</label>
+											<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username or email"
+											required>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-pass">
+											<label for="password" class="form-label">Password</label>
+											<input type="password" class="form-control showhide-pass" id="password" name="password" placeholder="Password" required>
+
+											<button onclick="showpass('password', 'eyeIcon')" type="button" id="btnToggle" class="form-pass__toggle"><i id="eyeIcon" class="fa-solid fa-eye"></i></button>
 										</div>
 									</div>
 								</div>
+
+								<div class="account__check">
+
+									<div class="account__check-remember">
+										<input type="checkbox" class="form-check-input" value="" id="terms-check">
+										<label for="terms-check" class="form-check-label">
+											Remember me
+										</label>
+									</div>
+									<div class="account__check-forgot">
+										<a href="https://elitestockoptions.com/forgot-password">Forgot Password?</a>
+									</div>
+								</div>
 								<p class="my-3 alert alert-success" id="errorshow1" role="alert"></p>
-								<button type="submit" class="trk-btn trk-btn--border trk-btn--primary d-block mt-4">Reset password</button>
+								<button type="submit" class="trk-btn trk-btn--border trk-btn--primary d-block mt-4">Sign in</button>
 							</form>
 							<div class="account__switch">
-								<p><a href="signin.html" class="style2"><i class="fa-solid fa-arrow-left-long"></i> Back to <span>Login</span></a></p>
+								<p>Don't have an account? <a href="https://elitestockoptions.com/signup">Sign up</a></p>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
 </section>
 
 <!-- ===============>> scrollToTop start here <<================= -->
-	<a href="forgot-password.html#" class="scrollToTop scrollToTop--style1"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+	<a href="logout.html#" class="scrollToTop scrollToTop--style1"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
 	<!-- ===============>> scrollToTop ending here <<================= -->
 <div class="gtranslate_wrapper"></div>
 
@@ -168,7 +198,7 @@
 		<script src="https://elitestockoptions.com/assets/js/all.min.js"></script>
 		<script src="https://elitestockoptions.com/assets/js/swiper-bundle.min.js"></script>
 		<script src="https://elitestockoptions.com/assets/js/aos.js"></script>
-		<script src="https://elitestockoptions.com/assets/js/toastr.js"></script>
+		<script src="../../assets/js/toastr.js"></script>
 		<script src="https://elitestockoptions.com/assets/js/fslightbox.js"></script>
 		<script src="https://elitestockoptions.com/assets/js/purecounter_vanilla.js"></script>
  <script src="https://www.cryptohopper.com/widgets/js/script"></script>
@@ -201,42 +231,58 @@ window.smartsupp||(function(d) {
   c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
 })(document);
 </script>
-<noscript> Powered by <a href="elitestockoptions.com”.html" target=“_blank”>BitTrust</a></noscript><script>
+<noscript> Powered by <a href="https://elitestockoptions.com/%E2%80%9Chttps://elitestockoptions.com%E2%80%9D" target=“_blank”>BitTrust</a></noscript><script>
     $(document).ready(function(){
         $("#errorshow1").hide();
     });
 
-    $("form#recover").submit(function(e) {
+    $("form#loginForm").submit(function(e) {
         e.preventDefault();
         var formData = new FormData(this);
-        formData.append('request', 'forgot-password');
-        var email = document.getElementById("email").value;
+        formData.append('request', 'login');
         $.ajax({
-            type:'POST',
-            url:'./ops/users',
-            data:formData,
+            url: './ops/users',
+            type: 'POST',
+            data: formData,
             beforeSend:function(){
-                $('#errorshow1').html("Sending Mail <span class='fas fa-spinner fa-pulse'></span> ").show();
+                $('#errorshow1').html("logging in <span class='fas fa-1x fa-spinner fa-spin'></span>").show();
             },
-            success:function(data){
+            success: function (data) {
                 let resp = $.parseJSON(data);
                 if (resp.status == "success") {
                     $("#errorshow1").html(resp.message).show();
+                    setTimeout(' window.location.href = "./app/account"; ', 3000);
                 }else{
                     $("#errorshow1").html(resp.message).show();
                     setTimeout(function(){
                         $("#errorshow1").hide();
-                    }, 8000);
+                    }, 10000);
                 }
             },
+            cache: false,
             error:function(){
-                $("#errorshow1").html("<p>There was an error! <br> Please try again!!</p>").show();
+                $('#errorshow1').html("An error has occured!!").show();
                 setTimeout(function(){
                     $("#errorshow1").hide();
-               	}, 8000);
+                }, 10000);
             },
             contentType: false,
             processData: false
         });
     });
 </script>
+
+<!-- Add this script at the end of the body -->
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error('Error signing out:', error.message);
+        } else {
+            // Redirect to signin page after logout
+            window.location.href = "../signin.html";
+        }
+    });
+</script>
+</body>
+</html>
