@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +14,39 @@
     <link rel="stylesheet" href="../../assets/css/tiny-slider.css">
     <link rel="stylesheet" href="../../assets/css/toastr.css" />
     <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5ZWRseWdtcWh1cHNsZmVmanF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2Mjc4MjIsImV4cCI6MjA1NTIwMzgyMn0.S4272Z5J5dEf8_UUbunLhSt03LqKww5RqSV8LzDTISQ";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        async function loadUserData() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) {
+                window.location.href = 'signin.html';
+                return;
+            }
+
+            const { data, error } = await supabaseClient
+                .from('profiles')
+                .select('*')
+                .eq('email', user.email)
+                .single();
+
+            if (error) {
+                console.error('Error loading user data:', error);
+                return;
+            }
+
+            // Populate the profile fields with fetched data
+            document.getElementById('fullname').value = data.fullname;
+            document.getElementById('email').value = data.email;
+            document.getElementById('phone').value = data.phone;
+            // Add other fields as necessary
+        }
+
+        loadUserData();
+    </script>
 </head>
 <style>
     body {
@@ -353,17 +384,17 @@
                             </div>
                             <div class="form-outline mb-3">
                                 <i class="far text-primary fa-user trailing"></i>
-                                <input type="text" value="Oseji Marvellous" id="fullname" required="" name="fullname" class="form-control form-icon-trailing">
+                                <input type="text" value="" id="fullname" required="" name="fullname" class="form-control form-icon-trailing">
                                 <label for="fullname" class="form-label">Full name</label>
                             </div>
                             <div class="form-outline mb-3">
                                 <i class="far text-primary fa-envelope trailing"></i>
-                                <input type="email" value="eric.marvelboy@gmail.com" id="email" required="" name="email" class="form-control form-icon-trailing">
+                                <input type="email" value="" id="email" required="" name="email" class="form-control form-icon-trailing">
                                 <label for="email" class="form-label">Email Address</label>
                             </div>
                             <div class="form-outline mb-3">
                                 <i class="fas text-primary fa-phone-square trailing"></i>
-                                <input type="text" id="phone" required="" value="09019005020" name="phone" class="form-control form-icon-trailing">
+                                <input type="text" id="phone" required="" value="" name="phone" class="form-control form-icon-trailing">
                                 <label for="phone" class="form-label">Phone Number</label>
                             </div>
                             <div class="form-group mb-3">

@@ -203,76 +203,36 @@
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <div class="tradingview-widget-copyright"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                {
-                    "symbols": [{
-                            "proName": "FOREXCOM:SPXUSD",
-                            "title": "S&P 500"
-                        },
-                        {
-                            "proName": "FOREXCOM:NSXUSD",
-                            "title": "US 100"
-                        },
-                        {
-                            "proName": "FX_IDC:EURUSD",
-                            "title": "EUR/USD"
-                        },
-                        {
-                            "proName": "BITSTAMP:BTCUSD",
-                            "title": "Bitcoin"
-                        },
-                        {
-                            "proName": "BITSTAMP:ETHUSD",
-                            "title": "Ethereum"
-                        },
-                        {
-                            "description": "Binance Smart Chain",
-                            "proName": "BINANCE:BNBUSDT"
-                        },
-                        {
-                            "description": "Luna",
-                            "proName": "BINANCE:LUNAUSDT"
-                        },
-                        {
-                            "description": "Gold",
-                            "proName": "CURRENCYCOM:GOLD"
-                        },
-                        {
-                            "description": "Gasoline",
-                            "proName": "PEPPERSTONE:GASOLINE"
-                        },
-                        {
-                            "description": "Aptos",
-                            "proName": "BINANCE:APTUSDT"
-                        },
-                        {
-                            "description": "Crude oil",
-                            "proName": "CURRENCYCOM:OIL_CRUDE"
-                        },
-                        {
-                            "description": "Solana",
-                            "proName": "BINANCE:SOLUSDT"
-                        },
-                        {
-                            "description": "Polygon Matic",
-                            "proName": "BINANCE:MATICUSDT"
-                        },
-                        {
-                            "description": "Shiba Inu",
-                            "proName": "BINANCE:SHIBUSDT"
-                        },
-                        {
-                            "description": "Cardano",
-                            "proName": "BINANCE:ADAUSDT"
-                        }
+            <script type="text/javascript">
+                window.TradingViewConfig = {
+                    "symbols": [
+                        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                        { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+                        { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
+                        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+                        { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+                        { "description": "Binance Smart Chain", "proName": "BINANCE:BNBUSDT" },
+                        { "description": "Luna", "proName": "BINANCE:LUNAUSDT" },
+                        { "description": "Gold", "proName": "CURRENCYCOM:GOLD" },
+                        { "description": "Gasoline", "proName": "PEPPERSTONE:GASOLINE" },
+                        { "description": "Aptos", "proName": "BINANCE:APTUSDT" },
+                        { "description": "Crude oil", "proName": "CURRENCYCOM:OIL_CRUDE" },
+                        { "description": "Solana", "proName": "BINANCE:SOLUSDT" },
+                        { "description": "Polygon Matic", "proName": "BINANCE:MATICUSDT" },
+                        { "description": "Shiba Inu", "proName": "BINANCE:SHIBUSDT" },
+                        { "description": "Cardano", "proName": "BINANCE:ADAUSDT" }
                     ],
                     "showSymbolLogo": true,
                     "colorTheme": "dark",
                     "isTransparent": false,
                     "displayMode": "adaptive",
                     "locale": "en"
-                }
+                };
             </script>
+                <!-- TradingView Widget Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    </script>
+
         </div>
     </div>
 <title>Markets - BitTrust</title>
