@@ -39,10 +39,29 @@
             }
 
             // Populate the profile fields with fetched data
-            document.getElementById('fullname').value = data.fullname;
+            document.getElementById('fullname').value = data.name;
             document.getElementById('email').value = data.email;
-            document.getElementById('phone').value = data.phone;
-            // Add other fields as necessary
+            document.getElementById('phone').value = data.phone_number;
+            document.getElementById('userID').value = data.id;
+            document.getElementById('country').value = data.country;
+
+            document.getElementById('available_balance').textContent = `$${data.available_balance.toFixed(2)}` || '0.00';
+            document.getElementById('profit_balance').textContent = `$${data.profit_balance.toFixed(2)}` || '0.00';
+            document.getElementById('total_balance').textContent = `$${data.total_balance.toFixed(2)}` || '0.00';
+
+
+            // Populate Bonus Balances
+            document.getElementById('bonus_balance').textContent = `$${data.bonus_balance.toFixed(2)}` || '0.00';
+
+            // Populate Pending Withdrawal
+            document.getElementById('pending_withdrawal').textContent = `$${data.pending_withdrawal.toFixed(2)}` || '0.00';
+
+
+            document.getElementById('account_type').textContent = data.account_type || 'Loading...';
+            document.getElementById('account_status').textContent = data.account_status || 'Loading...';
+            document.getElementById('email_verification').textContent = data.email_verified || 'Loading...';
+            document.getElementById('kyc_status').textContent = data.kyc_status || 'Loading...';
+            document.getElementById('level').textContent = data.level || 'Loading...';
         }
 
         loadUserData();
@@ -352,15 +371,15 @@
                     <div class="card-body">
                         <h4 class="font-weight-bold">Balances</h4>
                         <hr>
-                        <p class="h6"><b>Total Balance:</b> $0.00</p>
+                        <p class="h6"><b>Total Balance:</b> <span id="total_balance"></span></p>
                         <hr>
-                        <p class="h6"><b>Available Balance:</b> $0.00</p>
+                        <p class="h6"><b>Available Balance:</b> <span id="available_balance"></span></p>
                         <hr>
-                        <p class="h6"><b>Profit Balance:</b> $0.00</p>
+                        <p class="h6"><b>Profit Balance:</b> <span id="profit_balance"></span></p>
                         <hr>
-                        <p class="h6"><b>Bonus Balance:</b> $0.00</p>
+                        <p class="h6"><b>Bonus Balance:</b> <span id="bonus_balance"></span></p>
                         <hr>
-                        <p class="h6"><b>Pending Withdrawal:</b> $0.00</p>
+                        <p class="h6"><b>Pending Withdrawal:</b> <span id="pending_withdrawal"></span></p>
                         <hr>
                         <div class="text-center">
                             <button type="reset" onclick="$('#swapModal').modal('show')" class="btn btn-md btn-primary">Swap Balance</button>
@@ -379,7 +398,7 @@
                         <form class="" id="editprofile" enctype="multipart/form-data">
                             <div class="form-outline mb-3">
                                 <i class="far text-primary fa-user-plus trailing"></i>
-                                <input type="text" disabled value="3423512" id="mem_id" required="" name="mem_id" class="form-control form-icon-trailing">
+                                <input type="text" disabled value="3423512" id="userID" required="" name="mem_id" class="form-control form-icon-trailing">
                                 <label for="mem_id" class="form-label">User id</label>
                             </div>
                             <div class="form-outline mb-3">
@@ -722,15 +741,15 @@
                     <div class="card-body">
                         <h5 class="text-start">Account Info</h5>
                         <hr />
-                        <p><span class="fw-bold">Account Type:</span> <span class="fas fa-dot-circle text-success"></span> Live Account</p>
+                        <p><span class="fw-bold">Account Type:</span> <span class="fas fa-dot-circle text-success"></span> <span id="account_type"></span></p>
                         <hr />
-                        <p><span class="fw-bold">Account Status:</span> Active <span class="fas fa-check-circle text-success"></span></p>
+                        <p><span class="fw-bold">Account Status:</span> <span id="account_status"></span> <span class="fas fa-check-circle text-success"></span></p>
                         <hr />
-                        <p><span class="fw-bold">Email verification:</span> Not verified <span class="fas fa-times-circle text-danger"></span> <a href="javascript:void(0)" onclick="resendMail(3423512)">resend</a></p>
+                        <p><span class="fw-bold">Email verification:</span> <span id="email_verification"></span> <span class="fas fa-times-circle text-danger"></span> <a href="javascript:void(0)" onclick="resendMail(3423512)">resend</a></p>
                         <hr />
-                        <p><span class="fw-bold">KYC status:</span> Not verified <span class="fas fa-times-circle text-warning"></span></p>
+                        <p><span class="fw-bold">KYC status:</span> <span id="kyc_status"></span> <span class="fas fa-times-circle text-warning"></span></p>
                         <hr />
-                        <p><span class="fw-bold">Level:</span> Basic <span class="fas fa-chart-pie text-info"></span></p>
+                        <p><span class="fw-bold">Level:</span> <span id="level"></span> <span class="fas fa-chart-pie text-info"></span></p>
                     </div>
                 </div>
             </div>
