@@ -1,281 +1,298 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/style.min.css">
-    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../assets/css/style.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="../../assets/css/toastr.css" />
-    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
-
-</head>
-<style>
-    body {
-        font-family: 'Inter' !important;
-        /* font-size: 13.8px; */
-    }
-
-    button.btn {
+    <title>ID Verification - BitTrust</title>
+    <style>
+      body {
+        font-family: "Inter" !important;
+      }
+      button.btn {
         border-radius: 8px !important;
-    }
-
-    .pos {
+      }
+      .pos {
         z-index: 100;
         position: fixed !important;
         top: 48px;
-    }
-</style>
-
-<body class="" data-mdb-theme="light">
+      }
+      /* Styling for the error/success message */
+      #errorshow {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body data-mdb-theme="light">
+    <!-- Navbar -->
     <header>
-        <!-- Navbar -->
-        <nav id="main-navbar" class="navbar bg-body-tertiary navbar-expand-lg fixed-top">
-            <div class="container-fluid">
-                <a href="./" class="navbar-brand" style="font-size: .84em !important;"><span class="fw-bold">BitTrust</span></a>
-                <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuAvatar" data-mdb-toggle="dropdown" role="button" aria-expanded="false" href="#">
-                            <img class="rounded-circle" height="25" src="../../assets/images/user/3423512.jpg" loading="lazy" />
-                            <small class="ps-2">Oseji Marvellous</small>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                            <li>
-                                <a class="dropdown-item" href="./notifications">Notifications <span class="badge badge-primary">0</span></a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="./profile">My profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="./logout">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <title>ID Verification - BitTrust</title>
-    <main class="mt-5 pt-3 pb-3" id="content">
-        <div class="container">
-            <div class="card border border-1 border-primary">
-                <div class="card-body">
-                    <!--<p>Account access is restricted until verification is complete.</p>-->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <h4 class="font-weight-bold text-primary">KYC Verification</h4>
-                        </div>
-                        <!--<div class="">-->
-                        <!--    <button id="btnSkip" class="btn btn-primary btn-rounded btn-sm">skip</button>-->
-                        <!--</div>-->
-                    </div>
-                                            <p class="lh-base">Verify your account by providing us with a vaild document (ID card), Drivers Licence, Valid Work ID Card, Passport, etc are accepted. Please do not try to upload a fake document as our support team reviews every document uploaded.</p>
-                        <p class="lh-base">Detected fake documents will lead to immediate suspension of account! Once Uploaded, Our support team reviews your document and gets back to you within 24 Hours. The uploaded documents are for verification purposes only and are deleted once confirmed.</p>
-                        <p class="lh-base">You will be notified via email once your document has been verified. Choose your document and click on the verify button.</p>
-                        <form class="" id="verify" enctype="multipart/form-data">
-                            <div class="select-wrapper mb-3">
-                                <select class="select" name="type" id="type" required="" searchable="">
-                                    <option disabled selected>--Select Identity Document--</option>
-                                    <option>Identity Card (ID)</option>
-                                    <option>International Passport</option>
-                                    <option>Drivers Licence</option>
-                                    <option>Others</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="form-label" for="frontpage"> Front Page <span class="fas fa-cloud-upload-alt"></span></label>
-                                    <div class="form-outline mb-5">
-                                        <input type="file" id="frontpage" class="form-control" name="frontpage" required="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="backpage"> Back Page <span class="fas fa-cloud-upload-alt"></span></label>
-                                    <div class="form-outline mb-5">
-                                        <input type="file" id="backpage" class="form-control" name="backpage" required="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-4" align="center">
-                                <p class="alert alert-primary" id="errorshow"></p>
-                            </div>
-                            <center>
-                                <div class="">
-                                    <button type="submit" id="btnDep" class="btn btn-md btn-primary">Verify</button>
-                                </div>
-                            </center>
-                        </form>
-                                    </div>
-            </div>
+      <nav id="main-navbar" class="navbar bg-body-tertiary navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+          <a href="./" class="navbar-brand" style="font-size: .84em !important;">
+            <span class="fw-bold">BitTrust</span>
+          </a>
+          <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+            <li class="nav-item dropdown">
+              <a class="dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuAvatar" data-mdb-toggle="dropdown" role="button" aria-expanded="false" href="#">
+                <img class="rounded-circle" height="25" src="../../assets/images/user/3423512.jpg" loading="lazy" />
+                <small class="ps-2">Oseji Marvellous</small>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                <li>
+                  <a class="dropdown-item" href="./notifications">
+                    Notifications <span class="badge badge-primary">0</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./profile">My profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./logout">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mt-5 pt-3 pb-3" id="content">
+      <div class="container">
+        <div class="card border border-1 border-primary">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h4 class="font-weight-bold text-primary">KYC Verification</h4>
+            </div>
+            <p class="lh-base">
+              Verify your account by providing us with a valid document (ID card, Driver's Licence, Work ID, Passport, etc.). Please do not upload fake documents, as our support team reviews every upload.
+            </p>
+            <p class="lh-base">
+              Detected fake documents will lead to immediate suspension of your account! Once uploaded, our support team will review your documents and get back to you within 24 hours. The uploaded documents are used solely for verification and will be deleted once confirmed.
+            </p>
+            <p class="lh-base">
+              You will be notified via email once your document has been verified. Choose your documents and click the verify button.
+            </p>
+
+            <!-- Verification Form -->
+            <form id="verify" enctype="multipart/form-data">
+              <div class="select-wrapper mb-3">
+                <select class="select" name="type" id="type" required>
+                  <option disabled selected>--Select Identity Document--</option>
+                  <option>Identity Card (ID)</option>
+                  <option>International Passport</option>
+                  <option>Drivers Licence</option>
+                  <option>Others</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-label" for="frontpage">
+                    Front Page <span class="fas fa-cloud-upload-alt"></span>
+                  </label>
+                  <div class="form-outline mb-5">
+                    <input type="file" id="frontpage" class="form-control" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="backpage">
+                    Back Page <span class="fas fa-cloud-upload-alt"></span>
+                  </label>
+                  <div class="form-outline mb-5">
+                    <input type="file" id="backpage" class="form-control" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-4" align="center">
+                <p id="errorshow"></p>
+              </div>
+              <center>
+                <button type="submit" id="btnDep" class="btn btn-md btn-primary">
+                  Verify
+                </button>
+              </center>
+            </form>
+
+            <!-- Verification Table -->
+            <table class="table mt-4" id="verificationTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>User ID</th>
+                  <th>Document URLs</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- User's verification records will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
+
     <a class="floating mdark" id="switcher">
-        <span id="sback" class="fas fa-moon"></span>
+      <span id="sback" class="fas fa-moon"></span>
     </a>
     <footer class="mt-1 py-2 border-top" style="background: linear-gradient(179deg, #724fe5 6.25%);">
-        <div class="pt-2 container px-3">
-            <div class="text-center">
-                <h6>&copy; 2012 - 2025 BitTrust</h6>
-            </div>
+      <div class="pt-2 container px-3">
+        <div class="text-center">
+          <h6>&copy; 2012 - 2025 BitTrust</h6>
         </div>
+      </div>
     </footer>
-    <script src="../../assets/js/mdb.min.js"></script>
-    <script src="../../assets/js/switchtheme.js"></script>
-    <script src="../../assets/js/jquery-redirect.js"></script>
-    <script src="../../assets/js/toastr.js"></script>
+
+    <!-- Include Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        $(document).ready(function() {
-            $("#errorshow").fadeOut();
-        });
+      // Connect to Supabase
+      const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5ZWRseWdtcWh1cHNsZmVmanF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2Mjc4MjIsImV4cCI6MjA1NTIwMzgyMn0.S4272Z5J5dEf8_UUbunLhSt03LqKww5RqSV8LzDTISQ";
+      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        $("#switcher").click(function() {
-            const ttt = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
-            setTheme(ttt);
-        });
+      document.addEventListener("DOMContentLoaded", async () => {
+        // Get the current session
+        const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError || !session) {
+          // User is not logged in, redirect to signin page
+          window.location.href = "../../signin.html";
+          return;
+        }
+        const userId = session.user.id;
+        console.log("Logged in as:", userId);
 
-        if (localStorage.getItem("hidebal") == "shown" || !localStorage.getItem("hidebal")) {
-            $('#showBal11').hide();
-            $('#showBal13').hide();
-            $('#slashOnes').hide();
-            $('#slashTwos').hide();
-
-            $('#showBal1').show();
-            $('#showBal12').show();
-            $('#slashOne').show();
-            $('#slashTwo').show();
-        } else {
-            if (localStorage.getItem("hidebal") == "hidden") {
-                $('#showBal11').show();
-                $('#showBal13').show();
-                $('#slashOne').show();
-                $('#slashTwo').show();
-
-                $('#showBal1').hide();
-                $('#showBal12').hide();
-                $('#slashOnes').hide();
-                $('#slashTwos').hide();
-            }
+        // Fetch and display user's existing verification records
+        const { data: records, error: fetchError } = await supabaseClient
+          .from("verification")
+          .select("*")
+          .eq("user_id", userId);
+        if (fetchError) {
+          console.error("Error fetching verification records:", fetchError.message);
+        } else if (records) {
+          const tableBody = document.querySelector("#verificationTable tbody");
+          records.forEach((record) => {
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+              <td>${record.id}</td>
+              <td>${record.user_id}</td>
+              <td>${record.document_urls
+                .map((url) => `<a href="${url}" target="_blank">View Document</a>`)
+                .join(" ")}</td>
+              <td>${record.created_at}</td>
+            `;
+            tableBody.appendChild(newRow);
+          });
         }
 
-        function hideBal() {
-            localStorage.setItem("hidebal", "hidden");
-            $('#showBal11').show();
-            $('#showBal13').show();
-            $('#slashOne').show();
-            $('#slashTwo').show();
+        // Handle the form submission for new verification
+        const form = document.getElementById("verify");
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const errorShow = document.getElementById("errorshow");
+          errorShow.style.display = "none";
+          errorShow.style.color = "red";
+          const verifyButton = document.getElementById("btnDep");
+          verifyButton.disabled = true;
+          verifyButton.textContent = "Uploading...";
 
-            $('#showBal1').hide();
-            $('#showBal12').hide();
-            $('#slashOnes').hide();
-            $('#slashTwos').hide();
-        }
+          // Validate the document type
+          const docType = document.getElementById("type").value;
+          if (!docType) {
+            errorShow.textContent = "Select a document type to upload";
+            errorShow.style.display = "block";
+            verifyButton.disabled = false;
+            verifyButton.textContent = "Verify";
+            return;
+          }
 
-        function showBal() {
-            localStorage.setItem("hidebal", "shown");
-            $('#showBal11').hide();
-            $('#showBal13').hide();
-            $('#slashOne').hide();
-            $('#slashTwo').hide();
+          // Get files from input fields
+          const frontFile = document.getElementById("frontpage").files[0];
+          const backFile = document.getElementById("backpage").files[0];
 
-            $('#showBal1').show();
-            $('#showBal12').show();
-            $('#slashOnes').show();
-            $('#slashTwos').show();
-        }
+          if (!frontFile || !backFile) {
+            errorShow.textContent = "Both front and back files are required.";
+            errorShow.style.display = "block";
+            verifyButton.disabled = false;
+            verifyButton.textContent = "Verify";
+            return;
+          }
 
-        function redir(link, params) {
-            $.redirect(link, params);
-        }
+          try {
+            // Generate unique file paths using user ID and timestamp
+            const timestamp = Date.now();
+            const getExtension = (filename) => filename.split(".").pop();
+            const frontExt = getExtension(frontFile.name);
+            const backExt = getExtension(backFile.name);
+            const frontPath = `verification/${userId}/${timestamp}_front.${frontExt}`;
+            const backPath = `verification/${userId}/${timestamp}_back.${backExt}`;
 
-        $(document).ready(function() {
-            if (window.innerWidth <= 700) {
-                slimInstance.hide();
-                $("#sidenav-1").attr("data-mdb-mode", "over");
-            } else if (window.innerWidth > 700) {
-                slimInstance.show();
-                $("#sidenav-1").attr("data-mdb-mode", "side");
-                $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
-            }
+            // Upload files to the "documents" bucket
+            const { data: frontData, error: frontError } =
+              await supabaseClient.storage.from("documents").upload(frontPath, frontFile);
+            if (frontError) throw frontError;
 
+            const { data: backData, error: backError } =
+              await supabaseClient.storage.from("documents").upload(backPath, backFile);
+            if (backError) throw backError;
+
+            // Retrieve public URLs for the uploaded files
+            const { data: frontPublic } = supabaseClient.storage.from("documents").getPublicUrl(frontPath);
+            const { data: backPublic } = supabaseClient.storage.from("documents").getPublicUrl(backPath);
+            const documentUrls = [frontPublic.publicUrl, backPublic.publicUrl];
+
+            // Create a new verification record
+            const verificationRecord = {
+              id: crypto.randomUUID(),
+              user_id: userId,
+              document_urls: documentUrls,
+              created_at: new Date().toISOString(),
+            };
+
+            const { error: insertError } = await supabaseClient
+              .from("verification")
+              .insert([verificationRecord]);
+
+            if (insertError) throw insertError;
+
+            // Show success message
+            errorShow.style.color = "green";
+            errorShow.textContent = "Documents uploaded and verification record created successfully!";
+            errorShow.style.display = "block";
+
+            // Append new record to the table
+            const tableBody = document.querySelector("#verificationTable tbody");
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+              <td>${verificationRecord.id}</td>
+              <td>${verificationRecord.user_id}</td>
+              <td>${documentUrls
+                .map((url) => `<a href="${url}" target="_blank">View Document</a>`)
+                .join(" ")}</td>
+              <td>${verificationRecord.created_at}</td>
+            `;
+            tableBody.appendChild(newRow);
+
+            // Optionally reset the form after submission
+            form.reset();
+          } catch (error) {
+            errorShow.textContent = "An error occurred: " + error.message;
+            errorShow.style.display = "block";
+          }
+          verifyButton.disabled = false;
+          verifyButton.textContent = "Verify";
         });
-
-        window.addEventListener('resize', () => {
-            // Toggle on mobile
-            if (window.innerWidth <= 700) {
-                slimInstance.hide();
-                $("#sidenav-1").attr("data-mdb-mode", "over");
-            } else if (window.innerWidth > 700) {
-                slimInstance.show();
-                $("#sidenav-1").attr("data-mdb-mode", "side");
-                $("#sidenav-1").attr("data-mdb-close-on-esc", "false");
-            }
-        });
-
-        $("form#verify").submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            let request = "verifyId";
-            formData.append('request', request);
-            if ($("#type").val() == null) {
-                $('#errorshow').html("Select a document type to upload").fadeIn();
-            } else {
-                $.ajax({
-                    url: '../../ops/users',
-                    type: 'POST',
-                    data: formData,
-                    beforeSend: function() {
-                        $('#errorshow').html("Uploading Document. Please wait <span class='fas fa-spinner fa-spin'></span>").fadeIn();
-                    },
-                    success: function(data) {
-                        let response = $.parseJSON(data);
-                        if (response.status == 'success') {
-                            $("#errorshow").html(response.message).fadeIn();
-                            setTimeout(() => {
-                                location.reload();
-                            }, 2000);
-                        } else {
-                            $("#errorshow").html(response.message).fadeIn();
-                        }
-                    },
-                    cache: false,
-                    error: function(err) {
-                        $('#errorshow').html(err.statusText).fadeIn();
-                    },
-                    contentType: false,
-                    processData: false
-                });
-            }
-        });
-
-        $("#btnSkip").click(function() {
-            var mem_id = "3423512";
-            $.ajax({
-                url: '../../ops/users',
-                type: 'POST',
-                data: {
-                    request: 'skipVer',
-                    mem_id: mem_id
-                },
-                beforeSend: function() {
-                    $('#btnSkip').html("Please wait <span class='far fa-1x fa-spinner fa-spin'></span>").fadeIn();
-                },
-                success: function(data) {
-                    let res = $.parseJSON(data);
-                    if (res.status == 'success') {
-                        $("#btnSkip").html("KYC skipped").fadeIn();
-                        setTimeout(' window.location.href = "./"; ', 2000);
-                    } else {
-                        $("#btnSkip").html("<span class='far fa-exclamation-triangle'></span> " + res.response).fadeIn();
-                    }
-                },
-                error: function(err) {
-                    $('#btnSkip').html("<span class='far fa-exclamation-triangle'></span> An error has occured! " + err).fadeIn();
-                }
-            });
-        });
+      });
     </script>
+  </body>
+</html>
