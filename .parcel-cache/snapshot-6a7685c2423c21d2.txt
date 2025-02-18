@@ -2513,7 +2513,7 @@
 89/home/code-savan/Documents/elitestockoptions/node_modules/caniuse-lite/data/regions/LV.js1739642098231672894 0
 100/home/code-savan/Documents/elitestockoptions/node_modules/@parcel/markdown-ansi/src/markdown-ansi.js1739642093252077929 0
 85/home/code-savan/Documents/elitestockoptions/node_modules/@parcel/workers/lib/process1739642094364987270 1
-98/home/code-savan/Documents/elitestockoptions/elitestockoptions_backend/assets/images/logo-dark.png1735277446000000000 0
+98/home/code-savan/Documents/elitestockoptions/elitestockoptions_backend/assets/images/logo.png1735277446000000000 0
 89/home/code-savan/Documents/elitestockoptions/node_modules/weak-lru-cache/rollup.config.js1739642093390066685 0
 95/home/code-savan/Documents/elitestockoptions/node_modules/@supabase/realtime-js/src/lib/push.ts1739634748079948957 0
 84/home/code-savan/Documents/elitestockoptions/node_modules/entities/lib/esm/generated1739642095367905638 1

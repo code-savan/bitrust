@@ -13,7 +13,7 @@ try {
       $("body").attr("data-mdb-theme", "light");
       // $("body").removeClass("bg-dark");
       // $("body").addClass("bg-light");
-      $("#navbar-brand").attr("src", "../../assets/images/logo-dark.png");
+      $("#navbar-brand").attr("src", "../../assets/images/logo.png");
       $(".bl").hide();
       $(".bd").show();
     }
@@ -39,7 +39,7 @@ try {
         // $("body").addClass("bg-light");
         $(".bl").hide();
         $(".bd").show();
-        $("#navbar-brand").attr("src", "../../assets/images/logo-dark.png");
+        $("#navbar-brand").attr("src", "../../assets/images/logo.png");
         console.log("l3dark");
       }
     } else {
@@ -58,7 +58,7 @@ try {
         // $("body").addClass("bg-light");
         $(".bl").hide();
         $(".bd").show();
-        $("#navbar-brand").attr("src", "../../assets/images/logo-dark.png");
+        $("#navbar-brand").attr("src", "../../assets/images/logo.png");
         console.log("l1dark");
       }
     }
