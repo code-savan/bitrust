@@ -21,47 +21,52 @@
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         async function loadUserData() {
-            const { data: { user } } = await supabaseClient.auth.getUser();
-            if (!user) {
-                window.location.href = 'signin.html';
-                return;
+            try {
+                const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+                if (authError || !user) {
+                    console.error('User not authenticated:', authError);
+                    window.location.href = 'signin.html';
+                    return;
+                }
+
+                const { data, error } = await supabaseClient
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single();
+
+                if (error) {
+                    console.error('Error loading user data:', error);
+                    return;
+                }
+
+                if (data) {
+                    console.log('User Data:', data);
+                    document.getElementById('fullname').value = data.name || '';
+                    document.getElementById('email').value = data.email || '';
+                    document.getElementById('phone').value = data.phone_number || '';
+                    document.getElementById('userID').value = data.id || '';
+                    document.getElementById('country').value = data.country || '';
+
+                    document.getElementById('userName').textContent = data.name || '';
+                    document.getElementById('userUsername').textContent = data.username || '';
+                    document.getElementById('userLevel').textContent = data.level || '';
+
+                    document.getElementById('available_balance').textContent = `$${(data.available_balance || 0).toFixed(2)}`;
+                    document.getElementById('profit_balance').textContent = `$${(data.profit_balance || 0).toFixed(2)}`;
+                    document.getElementById('total_balance').textContent = `$${(data.total_balance || 0).toFixed(2)}`;
+                    document.getElementById('bonus_balance').textContent = `$${(data.bonus_balance || 0).toFixed(2)}`;
+                    document.getElementById('pending_withdrawal').textContent = `$${(data.pending_withdrawal || 0).toFixed(2)}`;
+
+                    document.getElementById('account_type').textContent = data.account_type || 'Loading...';
+                    document.getElementById('account_status').textContent = data.account_status || 'Loading...';
+                    document.getElementById('email_verification').textContent = data.email_verified || 'Loading...';
+                    document.getElementById('kyc_status').textContent = data.kyc_status || 'Loading...';
+                    document.getElementById('level').textContent = data.level || 'Loading...';
+                }
+            } catch (err) {
+                console.error('Unexpected error:', err);
             }
-
-            const { data, error } = await supabaseClient
-                .from('profiles')
-                .select('*')
-                .eq('email', user.email)
-                .single()           ;
-
-            if (error) {
-                console.error('Error loading user data:', error);
-                return;
-            }
-
-            // Populate the profile fields with fetched data
-            document.getElementById('fullname').value = data.name;
-            document.getElementById('email').value = data.email;
-            document.getElementById('phone').value = data.phone_number;
-            document.getElementById('userID').value = data.id;
-            document.getElementById('country').value = data.country;
-
-            document.getElementById('available_balance').textContent = `$${data.available_balance.toFixed(2)}` || '0.00';
-            document.getElementById('profit_balance').textContent = `$${data.profit_balance.toFixed(2)}` || '0.00';
-            document.getElementById('total_balance').textContent = `$${data.total_balance.toFixed(2)}` || '0.00';
-
-
-            // Populate Bonus Balances
-            document.getElementById('bonus_balance').textContent = `$${data.bonus_balance.toFixed(2)}` || '0.00';
-
-            // Populate Pending Withdrawal
-            document.getElementById('pending_withdrawal').textContent = `$${data.pending_withdrawal.toFixed(2)}` || '0.00';
-
-
-            document.getElementById('account_type').textContent = data.account_type || 'Loading...';
-            document.getElementById('account_status').textContent = data.account_status || 'Loading...';
-            document.getElementById('email_verification').textContent = data.email_verified || 'Loading...';
-            document.getElementById('kyc_status').textContent = data.kyc_status || 'Loading...';
-            document.getElementById('level').textContent = data.level || 'Loading...';
         }
 
         loadUserData();
