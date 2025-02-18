@@ -1671,7 +1671,7 @@ const createLosersDivs = (arr) => {
       <p class="text-start small mb-0">${arr[i].symbol}</p>
       <p class="text-start small">${arr[i].name}</p>
       </div>
-      
+
       <div class="col-md-3" dataIndex="${i}" style="width: 28% !important;">
       <p class="text-start small">$${prices}</p>
       </div>
@@ -1693,7 +1693,7 @@ const createLosersDivs = (arr) => {
     for (var i = 0; i < arr.length; i++) {
       $("#cards" + i).click(function () {
         var index = this.getAttribute("dataIndex");
-        redir("chart", {
+        redir("chart.html", {
           market: arr[index].market,
           symbol: arr[index].symbol,
         });
@@ -1727,7 +1727,7 @@ const createGainerDivs = (arr) => {
       <p class="text-start small mb-0">${arr[i].symbol}</p>
       <p class="text-start small">${arr[i].name}</p>
       </div>
-      
+
       <div class="col-md-3" dataIndex="${i}" style="width: 28% !important;">
       <p class="text-start small">$${prices}</p>
       </div>
@@ -1748,7 +1748,7 @@ const createGainerDivs = (arr) => {
     for (var i = 0; i < arr.length; i++) {
       $("#card" + i).click(function () {
         var index = this.getAttribute("dataIndex");
-        redir("chart", {
+        redir("chart.html", {
           market: arr[index].market,
           symbol: arr[index].symbol,
         });
@@ -1859,22 +1859,22 @@ const createMarketDiv = (arr, div) => {
     ].symbol.toLowerCase()}" style="cursor: pointer;" dataIndex="${i}">
          <div class="card-body px-2">
          <div class="row">
-   
+
          <div class="col-md-2" dataIndex="${i}" style="width: 15.66667% !important;">
          <img class="img-fluid" width="35" height="35" src ="../../assets/images/svgs/${arr[
            i
          ].symbol.toLowerCase()}-image.svg" />
          </div>
-   
+
          <div class="col-md-4" dataIndex="${i}" style="width: 34.33333% !important;">
          <p class="text-start small mb-0">${arr[i].name}</p>
          <p class="text-start small">${arr[i].symbol}</p>
          </div>
-         
+
          <div class="col-md-3" dataIndex="${i}" style="width: 28% !important;">
          <p class="text-start small">$${prices}</p>
          </div>
-   
+
          <div class="col-md-3" dataIndex="${i}" style="width: 22% !important;">
          <p class="text-start badge ${badge} small">${parseFloat(
       arr[i].percent_change_d
@@ -1891,7 +1891,7 @@ const createMarketDiv = (arr, div) => {
     for (var i = 0; i < arr.length; i++) {
       $("#cardss" + i + arr[i].symbol.toLowerCase()).click(function () {
         var index = this.getAttribute("dataIndex");
-        redir("chart", {
+        redir("chart.html", {
           market: arr[index].market,
           symbol: arr[index].symbol,
         });

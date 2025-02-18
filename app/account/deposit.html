@@ -15,12 +15,11 @@
     <link rel="stylesheet" href="../../assets/css/toastr.css" />
     <script src="../../assets/js/jquery-3.6.0.min.js"></script>
 
-    <!-- Initialize Supabase client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
-        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5ZWRseWdtcWh1cHNsZmVmanF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2Mjc4MjIsImV4cCI6MjA1NTIwMzgyMn0.S4272Z5J5dEf8_UUbunLhSt03LqKww5RqSV8LzDTISQ";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
 </head>
 <style>
@@ -75,9 +74,9 @@
                             <img src="../../assets/images/user/3423512.jpg" class="img-fluid img-sc">
                         </div>
                     </div>
-                    <h6 class="fw-bold mt-3 mb-1"> Oseji Marvellous</h6>
-                    <p class="small mb-0">Codesavan</p>
-                    <span class="">Basic Account <i class="material-icons" style="font-size: 0.89em;">star</i>
+                    <h6 class="fw-bold mt-3 mb-1"><span id="userName"></span></h6>
+                    <p class="small mb-0"><span id="userUsername"></span></p>
+                    <span class=""> <span id="userLevel"></span> Account <i class="material-icons" style="font-size: 0.89em;">star</i>
                     </span>
                 </li>
                 <li class="sidenav-item">
@@ -206,76 +205,32 @@
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <div class="tradingview-widget-copyright"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                {
-                    "symbols": [{
-                            "proName": "FOREXCOM:SPXUSD",
-                            "title": "S&P 500"
-                        },
-                        {
-                            "proName": "FOREXCOM:NSXUSD",
-                            "title": "US 100"
-                        },
-                        {
-                            "proName": "FX_IDC:EURUSD",
-                            "title": "EUR/USD"
-                        },
-                        {
-                            "proName": "BITSTAMP:BTCUSD",
-                            "title": "Bitcoin"
-                        },
-                        {
-                            "proName": "BITSTAMP:ETHUSD",
-                            "title": "Ethereum"
-                        },
-                        {
-                            "description": "Binance Smart Chain",
-                            "proName": "BINANCE:BNBUSDT"
-                        },
-                        {
-                            "description": "Luna",
-                            "proName": "BINANCE:LUNAUSDT"
-                        },
-                        {
-                            "description": "Gold",
-                            "proName": "CURRENCYCOM:GOLD"
-                        },
-                        {
-                            "description": "Gasoline",
-                            "proName": "PEPPERSTONE:GASOLINE"
-                        },
-                        {
-                            "description": "Aptos",
-                            "proName": "BINANCE:APTUSDT"
-                        },
-                        {
-                            "description": "Crude oil",
-                            "proName": "CURRENCYCOM:OIL_CRUDE"
-                        },
-                        {
-                            "description": "Solana",
-                            "proName": "BINANCE:SOLUSDT"
-                        },
-                        {
-                            "description": "Polygon Matic",
-                            "proName": "BINANCE:MATICUSDT"
-                        },
-                        {
-                            "description": "Shiba Inu",
-                            "proName": "BINANCE:SHIBUSDT"
-                        },
-                        {
-                            "description": "Cardano",
-                            "proName": "BINANCE:ADAUSDT"
-                        }
+             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  window.TradingViewConfig = {
+                    "symbols": [
+                        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                        { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+                        { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
+                        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+                        { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+                        { "description": "Binance Smart Chain", "proName": "BINANCE:BNBUSDT" },
+                        { "description": "Luna", "proName": "BINANCE:LUNAUSDT" },
+                        { "description": "Gold", "proName": "CURRENCYCOM:GOLD" },
+                        { "description": "Gasoline", "proName": "PEPPERSTONE:GASOLINE" },
+                        { "description": "Aptos", "proName": "BINANCE:APTUSDT" },
+                        { "description": "Crude oil", "proName": "CURRENCYCOM:OIL_CRUDE" },
+                        { "description": "Solana", "proName": "BINANCE:SOLUSDT" },
+                        { "description": "Polygon Matic", "proName": "BINANCE:MATICUSDT" },
+                        { "description": "Shiba Inu", "proName": "BINANCE:SHIBUSDT" },
+                        { "description": "Cardano", "proName": "BINANCE:ADAUSDT" }
                     ],
                     "showSymbolLogo": true,
                     "colorTheme": "dark",
                     "isTransparent": false,
                     "displayMode": "adaptive",
                     "locale": "en"
-                }
-            </script>
+                };
+    </script>
         </div>
     </div><title>Deposit - BitTrust</title>
 <main class="py-5 mt-5" id="content">
@@ -827,6 +782,73 @@ window.smartsupp||(function(d) {
 
 <script>
     document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Get the current session
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+
+            if (sessionError) {
+                throw sessionError;
+            }
+
+            if (!session) {
+                // User is not logged in, redirect to signin page
+                window.location.href = "../../signin.html";
+                return;
+            }
+
+            // Fetch user profile information
+            const { data: profile, error: profileError } = await supabaseClient
+                .from('profiles')
+                .select('name, username, level, total_balance, available_balance, profit_balance, bonus_balance, pending_withdrawal')
+                .eq('id', session.user.id)
+                .single();
+
+            if (profileError) {
+                throw profileError;
+            }
+
+            console.log('Fetching profile...');
+            console.log('Profile Data:', profile);
+
+            // Populate sidebar with user information
+            document.getElementById('userName').textContent = profile.name;
+            document.getElementById('userUsername').textContent = profile.username;
+            document.getElementById('userLevel').textContent = profile.level;
+
+            // Populate main content with user information
+            document.getElementById('welcomeUsername').textContent = profile.username;
+
+            // Populate Trading Balances
+            document.getElementById('showBal1').textContent = `$${profile.available_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal22').textContent = `-$${Math.abs(profile.available_balance.toFixed(2))}` || '0.00';
+            document.getElementById('showBal24').textContent = `+$${profile.available_balance.toFixed(2)}` || '0.00';
+
+            // Populate Profit Balances
+            document.getElementById('showBal12').textContent = `$${profile.profit_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal2').textContent = `+$${profile.profit_balance.toFixed(2)}` || '0.00';
+
+            // Populate Bonus Balances
+            document.getElementById('showBal121').textContent = `$${profile.bonus_balance.toFixed(2)}` || '0.00';
+
+            // Populate Pending Withdrawal
+            document.getElementById('pendingWithdrawal').textContent = `$${profile.pending_withdrawal.toFixed(2)}` || '0.00';
+
+        } catch (err) {
+            console.error('Error:', err.message);
+            // Optionally, display an error message to the user
+            // alert(`Error: ${err.message}`);
+        }
+
+        async function signOut() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'signin.html';
+        }
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
         const { data: { session }, error } = await supabase.auth.getSession();
 
         if (!session) {
@@ -847,4 +869,6 @@ window.smartsupp||(function(d) {
             // }
         }
     });
+
+
 </script>
