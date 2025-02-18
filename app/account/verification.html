@@ -174,7 +174,7 @@
 
         // Fetch and display user's existing verification records
         const { data: records, error: fetchError } = await supabaseClient
-          .from("verification")
+          .from("verifications")
           .select("*")
           .eq("user_id", userId);
         if (fetchError) {
@@ -234,8 +234,8 @@
             const getExtension = (filename) => filename.split(".").pop();
             const frontExt = getExtension(frontFile.name);
             const backExt = getExtension(backFile.name);
-            const frontPath = `verification/${userId}/${timestamp}_front.${frontExt}`;
-            const backPath = `verification/${userId}/${timestamp}_back.${backExt}`;
+            const frontPath = `verifications/${userId}/${timestamp}_front.${frontExt}`;
+            const backPath = `verifications/${userId}/${timestamp}_back.${backExt}`;
 
             // Upload files to the "documents" bucket
             const { data: frontData, error: frontError } =
@@ -260,7 +260,7 @@
             };
 
             const { error: insertError } = await supabaseClient
-              .from("verification")
+              .from("verifications")
               .insert([verificationRecord]);
 
             if (insertError) throw insertError;
