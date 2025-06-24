@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Not Found</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      background: #181818;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .error-message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      background: #232323;
+      padding: 2.5rem 3.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+      border: 2px solid #ff1744;
+    }
+    .error-message svg {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .error-title {
+      color: #ff1744;
+      font-weight: bold;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .error-desc {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-message">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" fill="#ff1744"/>
+      <path d="M32 16v20" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="32" cy="48" r="3" fill="#fff"/>
+    </svg>
+    <div class="error-title">Content Unavailable</div>
+    <div class="error-desc">This content is no longer on this server</div>
+  </div>
+</body>
+</html>

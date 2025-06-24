@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/datatables.min.css">
+    <link rel="stylesheet" href="../../assets/css/tiny-slider.css">
+    <link rel="stylesheet" href="../../assets/css/toastr.css" />
+    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://kyedlygmqhupslfefjqx.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5ZWRseWdtcWh1cHNsZmVmanF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2Mjc4MjIsImV4cCI6MjA1NTIwMzgyMn0.S4272Z5J5dEf8_UUbunLhSt03LqKww5RqSV8LzDTISQ";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+ <script src="//code.jivosite.com/widget/mcaGtNcSBc" async></script>
+</head>
+<style>
+    body {
+        font-family: 'Inter' !important;
+        /* font-size: 13.8px; */
+    }
+
+    button.btn {
+        border-radius: 8px !important;
+    }
+
+    .pos {
+        z-index: 100;
+        position: fixed !important;
+        top: 48px;
+        width: 100% !important;
+    }
+
+    .tns-nav {
+        display: none;
+    }
+
+    .circ {
+        height: 70px;
+        width: 70px;
+        background: rgb(59, 155, 196);
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .img-sc {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #walletAddress {
+        font-family: monospace;
+        background-color: #f8f9fa;
+    }
+
+    .loading-state {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body class="" data-mdb-theme="light">
+   <header>
+        <div id="sidenav-1" class="sidenav" role="navigation" data-mdb-close-on-esc="true" data-mdb-position="fixed" data-mdb-hidden="true" data-mdb-mode="side" style="overflow-y: auto;" data-mdb-slim="false" data-mdb-slim-collapsed="true" data-mdb-content="#content" data-mdb-focus-trap="true">
+            <ul class="sidenav-menu mt-5">
+                <li class="sidenav-item text-center border-bottom border-2 my-3">
+                    <div class="cent">
+                        <div class="circ">
+                            <img src="../../assets/images/user/3423512.jpg" class="img-fluid img-sc">
+                        </div>
+                    </div>
+                    <h6 class="fw-bold mt-3 mb-1"><span id="userName"></span></h6>
+                    <p class="small mb-0"><span id="userUsername"></span></p>
+                    <span class=""> <span id="userLevel"></span> Account <i class="material-icons" style="font-size: 0.89em;">star</i>
+                    </span>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./dashboard.html">
+                        <i class="material-icons me-2" style="font-size: 0.99em;">dashboard</i><span> Home</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./market.html">
+                        <i class="fas fa-chart-line me-2"></i><span> Markets</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./trades.html">
+                        <i class="fas fa-chart-bar me-2"></i><span> My trades</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./deposit.html">
+                        <i class="fas fa-sign-in-alt me-2"></i><span> Deposit</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./loan.html">
+                        <i class="fas fa-piggy-bank me-2"></i><span> Take Loan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./nfts.html">
+                        <i class="fas fa-image me-2"></i><span> Buy NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./create-nft.html">
+                        <i class="fas fa-user me-2"></i><span> Create NFTs</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./upgrade.html">
+                        <i class="fas fa-cubes me-2"></i><span> Upgrade Plan</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./transactions.html">
+                        <i class="fas fa-calendar-alt me-2"></i><span> All Transactions</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./traders.html">
+                        <i class="fas fa-user-tie me-2"></i><span> Copy Traders</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./withdrawal.html">
+                        <i class="fas fa-wallet me-2"></i><span> Withdrawal</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" href="./verification.html">
+                        <i class="fas fa-users me-2"></i><span> Verification</span>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="./profile.html">
+                        <i class="fas fa-cogs me-2"></i><span> User settings</span>
+                    </a>
+                </li>
+                <li class="sidenav-item mb-1">
+                    <a class="sidenav-link" href="/index.html">
+                        <i class="fas fa-power-off me-2"></i><span> Sign out</span>
+                    </a>
+                </li>
+                <li class="sidenav-item justify-content-center align-items-center d-flex">
+                    <i class="fas fa-sun"></i>
+                    <div class="ms-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                    </div>
+                    <i class="fas fa-moon"></i>
+                </li>
+            </ul>
+            <div class="sidenav-footer mt-5">
+                <p class="text-center">&copy; 2025 BitTrust</p>
+            </div>
+        </div>
+        <!-- Sidenav -->
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar bg-body-tertiary navbar-expand-lg fixed-top">
+            <div class="container-fluid">
+                <a onclick="slimInstance.show()" class="nav-link me-3" data-mdb-content="#slim-content" aria-haspopup="true">
+                    <i class="fas fa-bars" style="cursor: pointer;"></i>
+                    <a href="./dashboard.html" class="navbar-brand">
+                        <img src="../../assets/images/logo.png"  class="img-fluid" width="25" />
+                    </a>
+                </a>
+                <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                    <li class="nav-item me-3">
+                                            </li>
+                    <li class="nav-item me-3">
+                        <a onclick="$('#langmodal').modal('show');" style="cursor: pointer;" class="nav-link"> <i class="fas fa-language"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./notifications.html">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-relative top-10 translate-middle badge rounded-pill badge-primary">0<span class="visually-hidden">unread messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuAvatar" data-mdb-toggle="dropdown" role="button" aria-expanded="false" href="#">
+                            <img class="rounded-circle" height="25" src="../../assets/images/user/3423512.jpg" loading="lazy" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item" href="./profile.html">My profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/index.html">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--Main layout-->
+    <div class="pos">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"></div>
+             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  window.TradingViewConfig = {
+                    "symbols": [
+                        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                        { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+                        { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
+                        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+                        { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+                        { "description": "Binance Smart Chain", "proName": "BINANCE:BNBUSDT" },
+                        { "description": "Luna", "proName": "BINANCE:LUNAUSDT" },
+                        { "description": "Gold", "proName": "CURRENCYCOM:GOLD" },
+                        { "description": "Gasoline", "proName": "PEPPERSTONE:GASOLINE" },
+                        { "description": "Aptos", "proName": "BINANCE:APTUSDT" },
+                        { "description": "Crude oil", "proName": "CURRENCYCOM:OIL_CRUDE" },
+                        { "description": "Solana", "proName": "BINANCE:SOLUSDT" },
+                        { "description": "Polygon Matic", "proName": "BINANCE:MATICUSDT" },
+                        { "description": "Shiba Inu", "proName": "BINANCE:SHIBUSDT" },
+                        { "description": "Cardano", "proName": "BINANCE:ADAUSDT" }
+                    ],
+                    "showSymbolLogo": true,
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                };
+    </script>
+        </div>
+    </div><title>Deposit - BitTrust</title>
+<main class="py-5 mt-5" id="content">
+    <div class="container pt-5">
+        <div class="card border border-1 border-primary">
+            <div class="card-header py-3">
+                <!--<div class="d-flex justify-content-center align-items-center">-->
+                    <div class="">
+                        <h5 class="fw-bold text-uppercase text-center">Deposit</h5>
+                    </div>
+                <!--</div>-->
+            </div>
+            <div class="card-body">
+                <div id="depositDiv">
+                    <form id="depositForm" enctype="multipart/form-data" method="POST">
+                        <p class="alert alert-primary" id="errorshow" style="display: none;"></p>
+
+                        <!-- Amount Input -->
+                        <div class="form-group mb-4">
+                            <label class="form-label fw-bold">Enter Amount</label>
+                            <div class="input-group">
+                                <input type="number"
+                                       class="form-control"
+                                       id="amount"
+                                       name="amount"
+                                       placeholder="Enter amount"
+                                       min="10"
+                                       required />
+                                <span class="input-group-text">USD</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method Selection -->
+                        <div class="form-group mb-4">
+                            <label class="form-label fw-bold">Select Payment Method</label>
+                            <select class="form-control" id="type" name="type" required>
+                                <option value="" disabled selected>--Select payment method--</option>
+                                <option value="Bitcoin">Bitcoin</option>
+                            </select>
+                        </div>
+
+                        <!-- Payment Instructions -->
+                        <div id="paymentInstructions" class="alert alert-info mb-4" style="display: none;">
+                            <p class="mb-2"><strong>Payment Instructions:</strong></p>
+                            <p>Please send <span class="fw-bold">$<span id="amountDisplay">0</span></span> worth of <span id="methodDisplay" class="fw-bold"></span> to complete your deposit.</p>
+
+                            <!-- Add wallet address box -->
+                            <div class="bg-light p-3 rounded mt-3">
+                                <label class="form-label mb-2"><strong>Wallet Address</strong></label>
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           id="walletAddress"
+                                           readonly
+                                           value="bc1qfqd2d7gcapunvhu7t25ayy56evh0e7jq4l6thf" />
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            id="copyWalletBtn">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p class="mt-3 mb-0 small">After sending the payment, upload the proof of payment below.</p>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Upload Payment Proof</label>
+                            <div class="input-group">
+                                <input type="file"
+                                       class="form-control"
+                                       id="proof"
+                                       name="proof"
+                                       accept="image/*"
+                                       required />
+                            </div>
+                            <small class="form-text text-muted mt-2">
+                                Please upload a screenshot or photo of your payment receipt
+                            </small>
+
+                            <!-- Preview image container -->
+                            <div id="imagePreview" class="mt-3 text-center" style="display: none;">
+                                <img id="previewImg" src="" alt="Preview" style="max-width: 300px; max-height: 300px;" class="img-fluid rounded shadow-sm" />
+                            </div>
+                        </div>
+
+                        <div class="mt-4" align="center">
+                            <button type="submit"
+                                    class="btn btn-primary btn-block"
+                                    id="submitBtn">
+                                <span class="normal-state">
+                                    <i class="fas fa-upload me-2"></i>Submit Proof
+                                </span>
+                                <span class="loading-state d-none">
+                                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                    Processing...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card border border-1 border-primary mt-3">
+            <div class="card-body p-2">
+                <div class="border-bottom border-2 pb-1 mb-3">
+                    <h5 class="fw-bold text-center">My Deposits</h5>
+                </div>
+                <div class="table-wrapper table-responsive">
+                    <table class="table align-middle hoverable table-striped table-hover" id="depTable">
+                        <thead class="">
+                            <tr class="text-nowrap">
+                                <th scope="col" class="">ID</th>
+                                <th scope="col" class="">Date</th>
+                                <th scope="col" class="">Method</th>
+                                <th scope="col" class="">Type</th>
+                                <th scope="col" class="">Amount</th>
+                                <th scope="col" class="">Status</th>
+                                <th scope="col" class="">Action</th>
+                            </tr>
+                        </thead>
+                                                <tbody>
+                                                            <tr class="text-center">
+                                    <td class='text-center' colspan='7'>No transactions available to show</td>
+                                </tr>
+                                                                    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="barcodeModal" tabindex="-1" aria-labelledby="barcodeModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header justify-content-center">
+                <h3 class="fw-bold"><span class="fas fa-exclamation-circle"></span> Pay with <span id="paywith"></span></h3>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-3">
+                <div class="input-group form-outline mt-4 mb-3">
+                    <input type="text" class="form-control" readonly placeholder="Wallet address" id="address2" name="address2" aria-label="address2" />
+                    <button class="btn btn-primary" id="copyBtns" type="button" data-mdb-ripple-init aria-expanded="false">
+                        Copy
+                    </button>
+                    <label class="form-label" for="address">Wallet address</label>
+                </div>
+                <p class="h6 text-start lh-base">Make your deposit of $<span id="crypAmount">0</span> worth of <span id="crypto"></span> into the provided address and tap the deposit button. Or scan the QR Code below to complete deposit.</p>
+                <div>
+                    <img src="" id="barcode" class="img-fluid w-50" loading="lazy" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="badge badge-danger p-3">
+                    <a type="button" onclick="$('#barcodeModal').modal('hide');" class="link">Close</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="floating mdark" id="switcher">
+    <span id="sback" class="fas fa-moon"></span>
+</a>
+<footer class="mt-1 py-2 border-top" style="background: linear-gradient(179deg, #724fe5 6.25%);">
+    <div class="pt-2 container px-3">
+        <div class="text-center">
+            <h6>&copy; 2015 - 2025 BitTrust</h6>
+            <!-- <div class="text-center">
+                <a href="./markets" class="active"><i class="fas fa-chart-bar"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./deposits" class="active"><i class="fas fa-clock"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./" class="active"><i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./upgrade" class="active"><i class="fas fa-calendar-alt"></i>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="./account" class="active"><i class="fas fa-user"></i>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="langmodal" tabindex="-1" aria-labelledby="langmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header justify-content-center">
+                <h3 class=""><span class="fas fa-exclamation-circle"></span> information</h3>
+                <button type='button' class='btn-close' data-mdb-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class="modal-body py-4 my-3">
+                <div class="gtranslate_wrapper"></div>
+                <div id="message">
+                    <div class="mt-2">
+                        <button type='button' class='btn btn-md btn-outline-danger' data-mdb-dismiss='modal' aria-label='Close'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal: process-->
+</body>
+<!--<div id="google_translate_element" style="z-index: 1500; position: fixed; bottom:16px; left:15px;"></div>-->
+<!--<script type="text/javascript">-->
+<!--  function googleTranslateElementInit() {-->
+<!--    new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');-->
+<!--  }-->
+<!--</script>-->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="../../assets/js/mdb.min.js"></script>
+<script src="../../assets/js/switchtheme.js"></script>
+<script src="../../assets/js/jquery-redirect.js"></script>
+<script src="../../assets/js/tiny-slider.js"></script>
+<script src="../../assets/js/toastr.js"></script>
+<script>
+    window.gtranslateSettings = {
+        "default_language": "en",
+        "wrapper_selector": ".gtranslate_wrapper"
+    }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/v1.0.1/dropdown.js" defer></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Initialize sidenav
+        const sidenav = document.getElementById('sidenav-1');
+        const slimInstance = new mdb.Sidenav(sidenav);
+
+        // Handle sidebar behavior based on screen size
+        function handleResize() {
+            if (window.innerWidth <= 700) {
+                slimInstance.hide();
+                sidenav.setAttribute("data-mdb-mode", "over");
+                sidenav.setAttribute("data-mdb-hidden", "true");
+            } else {
+                slimInstance.show();
+                sidenav.setAttribute("data-mdb-mode", "side");
+                sidenav.setAttribute("data-mdb-hidden", "false");
+                sidenav.setAttribute("data-mdb-close-on-esc", "false");
+            }
+        }
+
+        // Initial check
+        handleResize();
+
+        // Listen for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Rest of your existing initialization code...
+        $("#errorshow").hide();
+
+        // Check authentication
+        const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+        if (!session) {
+            window.location.href = "../../signin.html";
+            return;
+        }
+
+        // Fetch user profile for sidebar
+        const { data: profile, error: profileError } = await supabaseClient
+            .from('profiles')
+            .select('name, username, level')
+            .eq('id', session.user.id)
+            .single();
+
+        if (profile) {
+            // Update sidebar user info
+            document.getElementById('userName').textContent = profile.name;
+            document.getElementById('userUsername').textContent = profile.username;
+            document.getElementById('userLevel').textContent = profile.level;
+        }
+
+        // Load deposit history
+        await loadDepositHistory();
+
+        // Show payment instructions when amount and method are selected
+        $('#amount, #type').on('change', function() {
+            const amount = $('#amount').val();
+            const method = $('#type').val();
+
+            if (amount && method) {
+                $('#amountDisplay').text(amount);
+                $('#methodDisplay').text(method);
+                $('#paymentInstructions').fadeIn();
+            }
+        });
+
+        // Copy wallet address functionality
+        document.getElementById('copyWalletBtn').addEventListener('click', () => {
+            const walletInput = document.getElementById('walletAddress');
+            walletInput.select();
+            document.execCommand('copy');
+
+            // Show feedback
+            const btn = document.getElementById('copyWalletBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        });
+
+        // Form submission with loading state
+        $("form#depositForm").submit(async (e) => {
+            e.preventDefault();
+
+            const amount = parseFloat($('#amount').val());
+            const method = $('#type').val();
+            const receiptFile = $('#proof')[0].files[0];
+
+            if (!amount || !method || !receiptFile) {
+                $('#errorshow').html("Please fill all required fields").fadeIn();
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.normal-state').classList.add('d-none');
+            submitBtn.querySelector('.loading-state').classList.remove('d-none');
+
+            try {
+                // Upload receipt image
+                const fileExt = receiptFile.name.split('.').pop();
+                const filePath = `${session.user.id}/${Date.now()}.${fileExt}`;
+
+                const { data: uploadData, error: uploadError } = await supabaseClient
+                    .storage
+                    .from('deposit_receipts')
+                    .upload(filePath, receiptFile);
+
+                if (uploadError) throw uploadError;
+
+                // Get public URL for the uploaded file
+                const { data: { publicUrl } } = supabaseClient
+                    .storage
+                    .from('deposit_receipts')
+                    .getPublicUrl(filePath);
+
+                // Create deposit record
+                const { data: deposit, error: depositError } = await supabaseClient
+                    .from('deposits')
+                    .insert({
+                        user_id: session.user.id,
+                        amount: amount,
+                        method: method,
+                        type: 'Trading Balance',
+                        receipt_url: publicUrl,
+                        status: 'pending'
+                    })
+                    .select()
+                    .single();
+
+                if (depositError) throw depositError;
+
+                $("#errorshow").html("Deposit request submitted successfully!").fadeIn();
+                setTimeout(() => location.reload(), 2000);
+
+            } catch (err) {
+                console.error('Error:', err);
+                $('#errorshow').html(`Error: ${err.message}`).fadeIn();
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.querySelector('.normal-state').classList.remove('d-none');
+                submitBtn.querySelector('.loading-state').classList.add('d-none');
+            }
+        });
+
+        // Image preview functionality
+        const proofInput = document.getElementById('proof');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        proofInput.addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        });
+    });
+
+    async function loadDepositHistory() {
+        try {
+            // Get current user session
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) return;
+
+            // Fetch only deposits for the current user
+            const { data: deposits, error } = await supabaseClient
+                .from('deposits')
+                .select('*')
+                .eq('user_id', session.user.id)  // Filter by current user's ID
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            const tbody = document.querySelector('#depTable tbody');
+            tbody.innerHTML = '';
+
+            if (!deposits || deposits.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="text-center">
+                        <td colspan='7'>No transactions available to show</td>
+                    </tr>`;
+                return;
+            }
+
+            deposits.forEach(deposit => {
+                const row = `
+                    <tr>
+                        <td>${deposit.id.slice(0,8)}</td>
+                        <td>${new Date(deposit.created_at).toLocaleDateString()}</td>
+                        <td>${deposit.method}</td>
+                        <td>${deposit.type}</td>
+                        <td>$${deposit.amount.toFixed(2)}</td>
+                        <td><span class="badge badge-${getStatusBadgeColor(deposit.status)}">${deposit.status}</span></td>
+                        <td>
+                            <a href="${deposit.receipt_url}" target="_blank" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> View Receipt
+                            </a>
+                        </td>
+                    </tr>`;
+                tbody.innerHTML += row;
+            });
+
+        } catch (err) {
+            console.error('Error loading deposit history:', err);
+            $('#errorshow').html(`Error loading deposit history: ${err.message}`).fadeIn();
+        }
+    }
+
+    function getStatusBadgeColor(status) {
+        switch (status.toLowerCase()) {
+            case 'pending': return 'warning';
+            case 'completed': return 'success';
+            case 'rejected': return 'danger';
+            default: return 'secondary';
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Get the current session
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+
+            if (sessionError) {
+                throw sessionError;
+            }
+
+            if (!session) {
+                // User is not logged in, redirect to signin page
+                window.location.href = "../../signin.html";
+                return;
+            }
+
+            // Fetch user profile information
+            const { data: profile, error: profileError } = await supabaseClient
+                .from('profiles')
+                .select('name, username, level, total_balance, available_balance, profit_balance, bonus_balance, pending_withdrawal')
+                .eq('id', session.user.id)
+                .single();
+
+            if (profileError) {
+                throw profileError;
+            }
+
+            console.log('Fetching profile...');
+            console.log('Profile Data:', profile);
+
+            // Populate sidebar with user information
+            document.getElementById('userName').textContent = profile.name;
+            document.getElementById('userUsername').textContent = profile.username;
+            document.getElementById('userLevel').textContent = profile.level;
+
+            // Populate main content with user information
+            document.getElementById('welcomeUsername').textContent = profile.username;
+
+            // Populate Trading Balances
+            document.getElementById('showBal1').textContent = `$${profile.available_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal22').textContent = `-$${Math.abs(profile.available_balance.toFixed(2))}` || '0.00';
+            document.getElementById('showBal24').textContent = `+$${profile.available_balance.toFixed(2)}` || '0.00';
+
+            // Populate Profit Balances
+            document.getElementById('showBal12').textContent = `$${profile.profit_balance.toFixed(2)}` || '0.00';
+            document.getElementById('showBal2').textContent = `+$${profile.profit_balance.toFixed(2)}` || '0.00';
+
+            // Populate Bonus Balances
+            document.getElementById('showBal121').textContent = `$${profile.bonus_balance.toFixed(2)}` || '0.00';
+
+            // Populate Pending Withdrawal
+            document.getElementById('pendingWithdrawal').textContent = `$${profile.pending_withdrawal.toFixed(2)}` || '0.00';
+
+        } catch (err) {
+            console.error('Error:', err.message);
+            // Optionally, display an error message to the user
+            // alert(`Error: ${err.message}`);
+        }
+
+        async function signOut() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'signin.html';
+        }
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const { data: { session }, error } = await supabase.auth.getSession();
+
+        if (!session) {
+            // User is not logged in, redirect to signin page
+            window.location.href = "../signin.html";
+        } else {
+            // Fetch user deposit information if needed
+            // Example:
+            // const { data: deposits, error: depositsError } = await supabase
+            //     .from('deposits')
+            //     .select('*')
+            //     .eq('user_id', session.user.id);
+
+            // if (depositsError) {
+            //     console.error('Error fetching deposits:', depositsError.message);
+            // } else {
+            //     // Populate deposit information
+            // }
+        }
+    });
+
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Image preview functionality
+        const proofInput = document.getElementById('proof');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        proofInput.addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        });
+    });
+</script>
